@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>記録一覧</title>
+<link href="<%=request.getContextPath()%>/css/style.css"
+	rel="stylesheet" type="text/css">
 </head>
 <body>
 	<table>
@@ -100,6 +102,32 @@
 	<form action="/" method="GET">
 		<button type="submit">検索</button>
 	</form>
+	<table>
+		<tr>
+			<th>日付</th>
+			<th>身長(cm)</th>
+			<th>体重(kg)</th>
+			<th>体温(°C)</th>
+		</tr>
+		<tr>
+			<th><a href="/recordChange">2020/06/01</a></th>
+			<th>163</th>
+			<th>71</th>
+			<th>36.5</th>
+		</tr>
+		<tr>
+			<th>2020/06/02</th>
+			<th>164</th>
+			<th>72</th>
+			<th>36.5</th>
+		</tr>
+		<tr>
+			<th>2020/06/03</th>
+			<th>165</th>
+			<th>73</th>
+			<th>36.5</th>
+		</tr>
+	</table>
 	<form action="/recordInput" method="GET">
 		<button type="submit">新規登録</button>
 	</form>
