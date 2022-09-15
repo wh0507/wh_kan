@@ -4,33 +4,35 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class RecordDAO extends DBAccess {
 
 	PreparedStatement pStmt = null;
 	ResultSet rs = null;
 
-	private static RecordDAO shDAO = new RecordDAO();
+	private static RecordDAO rcDao = new RecordDAO();
 
-	ArrayList<ShohinBean> list = new ArrayList<>();
+	ArrayList<RecordBean> list = new ArrayList<>();
 
 	//10.全件検査
-	public ArrayList<ShohinBean> selectAll() {
+	public ArrayList<RecordBean> selectAll() {
 		try {
 			//コネクト処理
-			conn = shDAO.getConnection();
+			conn = rcDao.getConnection();
 			//SQL文作成
-			String sql = "SELECT * FROM shohin";
+			String sql = "SELECT * FROM height_weight_record";
 			pStmt = conn.prepareStatement(sql);
 			//SELECTを実行し、結果表(ResultSet)を取得
 			rs = pStmt.executeQuery();
 			//結果表に格納されたレコードの内容を表示
 			while (rs.next()) {
-				String id = rs.getString("ID");
-				String name = rs.getString("NAME");
-				int kakaku = rs.getInt("KAKAKU");
-				ShohinBean shBean = new ShohinBean(id, name, kakaku);
-				list.add(shBean);
+				Date inputDate = rs.getDate("input_date");
+				double height = rs.getDouble("height");
+				double weight = rs.getDouble("weight");
+				double temperature = rs.getDouble("temperature");
+				RecordBean rcBean = new RecordBean(inputDate, height, weight, temperature);
+				list.add(rcBean);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,8 +43,8 @@ public class RecordDAO extends DBAccess {
 					rs.close();
 				if (pStmt != null)
 					pStmt.close();
-				if (shDAO != null)
-					shDAO.closeDBAccess();
+				if (rcDao != null)
+					rcDao.closeDBAccess();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -51,23 +53,25 @@ public class RecordDAO extends DBAccess {
 	}
 
 	//11.条件検査呼び出し
-	public ArrayList<ShohinBean> jouken(String id) {
-		ShohinBean shBean = null;
+	public ArrayList<RecordBean> selectOne(int id) {
+		RecordDAO rcDao = null;
 		try {
 			//コネクト処理
-			conn = shDAO.getConnection();
+			conn = rcDao.getConnection();
 			//SQL文作成
-			String sql = "SELECT * FROM shohin WHERE id=?";
+			String sql = "SELECT * FROM height_weight_record WHERE id=?";
 			pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, id); //index1にid設定
+			pStmt.setInt(1, id); //index1にid設定
 			rs = pStmt.executeQuery();
 
 			rs.next();
-			String name = rs.getString("NAME");
-			int kakaku = rs.getInt("KAKAKU");
+			Date inputDate = rs.getDate("input_date");
+			double height = rs.getDouble("height");
+			double weight = rs.getDouble("weight");
+			double temperature = rs.getDouble("temperature");
 
-			shBean = new ShohinBean(id, name, kakaku);
-			list.add(shBean);
+			rcBean = new RecordBean(id, inputDate, height, weight, temperature);
+			list.add(rcBean);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,8 +82,8 @@ public class RecordDAO extends DBAccess {
 					rs.close();
 				if (pStmt != null)
 					pStmt.close();
-				if (shDAO != null)
-					shDAO.closeDBAccess();
+				if (rcDao != null)
+					rcDao.closeDBAccess();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -92,10 +96,10 @@ public class RecordDAO extends DBAccess {
 		int result = 0;
 		try {
 			//コネクト処理
-			conn = shDAO.getConnection();
+			conn = rcDao.getConnection();
 
 			//SQL文作成
-			String sql = "INSERT INTO shohin(id,name,kakaku) values(?,?,?)";
+			String sql = "INSERT INTO height_weight_record(id,name,kakaku) values(?,?,?)";
 			pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, id); //setString(埋め込み場所の順序,実際のデータor変数)
@@ -110,8 +114,8 @@ public class RecordDAO extends DBAccess {
 			try {
 				if (pStmt != null)
 					pStmt.close();
-				if (shDAO != null)
-					shDAO.closeDBAccess();
+				if (rcDao != null)
+					rcDao.closeDBAccess();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -124,10 +128,10 @@ public class RecordDAO extends DBAccess {
 		int result = 0;
 		try {
 			//コネクト処理
-			conn = shDAO.getConnection();
+			conn = rcDao.getConnection();
 
 			//SQL文作成
-			String sql = "UPDATE shohin SET name=?, kakaku=? WHERE id=?";
+			String sql = "UPDATE height_weight_record SET name=?, kakaku=? WHERE id=?";
 			pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, name);
@@ -143,8 +147,8 @@ public class RecordDAO extends DBAccess {
 			try {
 				if (pStmt != null)
 					pStmt.close();
-				if (shDAO != null)
-					shDAO.closeDBAccess();
+				if (rcDao != null)
+					rcDao.closeDBAccess();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -157,10 +161,10 @@ public class RecordDAO extends DBAccess {
 		int result = 0;
 		try {
 			//コネクト処理
-			conn = shDAO.getConnection();
+			conn = rcDao.getConnection();
 
 			//SQL文作成
-			String sql = "DELETE FROM shohin WHERE id=?";
+			String sql = "DELETE FROM height_weight_record WHERE id=?";
 			pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, id);
 
@@ -172,8 +176,8 @@ public class RecordDAO extends DBAccess {
 			try {
 				if (pStmt != null)
 					pStmt.close();
-				if (shDAO != null)
-					shDAO.closeDBAccess();
+				if (rcDao != null)
+					rcDao.closeDBAccess();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
