@@ -15,16 +15,18 @@ public class RecordInputServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		doPost(request, response);
 
-		String forwardPath = null;
-		forwardPath = "/WEB-INF/jsp/recordInput.jsp";
-		//MainMenuへフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		String forwardPath = null;
+		forwardPath = "/WEB-INF/jsp/recordInput.jsp?no=2";
+		//MainMenuへフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+		dispatcher.forward(request, response);
 
 	}
 

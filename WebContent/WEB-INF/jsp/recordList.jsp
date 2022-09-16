@@ -1,5 +1,11 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="model.RecordBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+ArrayList<RecordBean> lists = (ArrayList<RecordBean>) request.getAttribute("recordList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +15,24 @@
 	rel="stylesheet" type="text/css">
 </head>
 <body>
+	<header>
+		<%@ include file="header.jsp"%>
+	</header>
+	<table>
+		<%
+		for (RecordBean list : lists) {
+		%>
+		<tr>
+			<td><%=list.getInputDate()%></td>
+			<td><%=list.getHeight()%></td>
+			<td><%=list.getWeight()%></td>
+			<td><%=list.getTemperature()%></td>
+		</tr>
+		<%
+		}
+		%>
+	</table>
+
 	<table>
 		<tr>
 			<th>日付</th>
@@ -110,16 +134,18 @@
 			<th>体温(°C)</th>
 		</tr>
 		<tr>
-			<th><a href="/recordChange">2020/06/01</a></th>
-			<th>163</th>
-			<th>71</th>
-			<th>36.5</th>
-		</tr>
-		<tr>
-			<th>2020/06/02</th>
-			<th>164</th>
-			<th>72</th>
-			<th>36.5</th>
+			<%
+			for (RecordBean list : lists) {
+			%>
+			<th>
+				<a href="/recordChange?no=3"><%=list.getInputDate()%></a>
+			</th>
+			<th><%=list.getHeight()%></th>
+			<th><%=list.getWeight()%></th>
+			<th><%=list.getTemperature()%></th>
+			<%
+			}
+			%>
 		</tr>
 		<tr>
 			<th>2020/06/03</th>
@@ -128,7 +154,7 @@
 			<th>36.5</th>
 		</tr>
 	</table>
-	<form action="/recordInput" method="GET">
+	<form action="/recordInput?" method="POST">
 		<button type="submit">新規登録</button>
 	</form>
 	<form action="/" method="GET">

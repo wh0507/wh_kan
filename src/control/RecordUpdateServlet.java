@@ -17,14 +17,22 @@ public class RecordUpdateServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+//		//失敗時
+//		String forwardPath = null;
+//		forwardPath = "/recordChange";
+//		//MainMenuへフォワード
+//		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+//		dispatcher.forward(request, response);
+
+		//成功時
+		response.sendRedirect("/recordList");
+
 	}
 
 }

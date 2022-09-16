@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,24 +10,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.RecordBean;
+import model.RecordDAO;
+
 @WebServlet("/recordList")
 public class RecordListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		doPost(request, response);
 
-		String forwardPath = null;
-		forwardPath = "/WEB-INF/jsp/recordList.jsp";
-		//MainMenuへフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		//DBから呼び出し
+		RecordDAO dao = new RecordDAO();
+		List<RecordBean> recordList = dao.selectOne("admin");
+		request.setAttribute("recordList", recordList);
+
+		//記録一覧画面へフォワード
+		String forwardPath = null;
+		forwardPath = "/WEB-INF/jsp/recordList.jsp?no=1";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+		dispatcher.forward(request, response);
+
 	}
 
 }

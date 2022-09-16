@@ -9,9 +9,11 @@
 	rel="stylesheet" type="text/css">
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<header>
+		<%@ include file="header.jsp"%>
+	</header>
 
-	<form action="/recordList" method="GET">
+	<form action="/recordList" method="POST">
 		<button type="submit">記録一覧</button>
 	</form>
 </body>

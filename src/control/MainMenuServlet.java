@@ -15,18 +15,20 @@ public class MainMenuServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String forwardPath = null;
-		forwardPath = "/WEB-INF/jsp/mainMenu.jsp";
-		//MainMenuへフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-		dispatcher.forward(request, response);
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		request.setCharacterEncoding("UTF-8");
+
+		String forwardPath = null;
+
+		forwardPath = "/WEB-INF/jsp/mainMenu.jsp?no=0";
+		//MainMenuへフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+		dispatcher.forward(request, response);
 	}
 
 }

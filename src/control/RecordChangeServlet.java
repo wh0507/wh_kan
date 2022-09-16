@@ -18,6 +18,7 @@ public class RecordChangeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		doPost(request, response);
 
 	}
 
@@ -25,7 +26,7 @@ public class RecordChangeServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String forwardPath = null;
-		forwardPath = "/WEB-INF/jsp/recordChange.jsp";
+		forwardPath = "/WEB-INF/jsp/recordChange.jsp?no=3";
 		//MainMenuへフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 		dispatcher.forward(request, response);

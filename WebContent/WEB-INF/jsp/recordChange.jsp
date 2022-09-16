@@ -4,13 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="<%=request.getContextPath()%>/css/style.css"
+	rel="stylesheet" type="text/css">
 <title>記録詳細画面</title>
 </head>
 <body>
+	<header>
+		<%@ include file="header.jsp"%>
+	</header>
+
 	<table>
 		<tr>
 			<th>日付</th>
-			<td>　</td>
+			<td></td>
 		</tr>
 		<tr>
 			<th>身長</th>

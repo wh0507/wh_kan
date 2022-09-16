@@ -10,15 +10,10 @@ public class RecordBean {
 	private double height, weight, temperature;
 	private String text;
 
-	/**
-	 * @param id
-	 * @param userId
-	 * @param inputDate
-	 * @param height
-	 * @param weight
-	 * @param temperature
-	 * @param text
-	 */
+	public RecordBean(String userId) {
+		this.userId = userId;
+	}
+
 	public RecordBean(int id, String userId, Date inputDate, double height, double weight, double temperature,
 			String text) {
 		this.id = id;
