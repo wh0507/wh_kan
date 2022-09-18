@@ -1,5 +1,8 @@
+<%@page import="model.RecordBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +16,7 @@
 		<%@ include file="header.jsp"%>
 	</header>
 
-	<form action="/recordList" method="POST">
+	<form action="/recordList" method="post">
 		<button type="submit">記録一覧</button>
 	</form>
 </body>

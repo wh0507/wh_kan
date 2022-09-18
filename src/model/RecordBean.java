@@ -1,38 +1,42 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class RecordBean {
 
 	private int id;
 	private String userId;
-	private Date inputDate;
+	private LocalDate inputDate;
 	private double height, weight, temperature;
-	private String text;
+	private String note;
+
+	public RecordBean() {
+
+	}
 
 	public RecordBean(String userId) {
 		this.userId = userId;
 	}
 
-	public RecordBean(int id, String userId, Date inputDate, double height, double weight, double temperature,
-			String text) {
+	public RecordBean(int id, String userId, LocalDate inputDate, double height, double weight, double temperature,
+			String note) {
 		this.id = id;
 		this.userId = userId;
 		this.inputDate = inputDate;
 		this.height = height;
 		this.weight = weight;
 		this.temperature = temperature;
-		this.text = text;
+		this.note = note;
 	}
 
-	public RecordBean(Date inputDate, double height, double weight, double temperature) {
+	public RecordBean(LocalDate inputDate, double height, double weight, double temperature) {
 		this.inputDate = inputDate;
 		this.height = height;
 		this.weight = weight;
 		this.temperature = temperature;
 	}
 
-	public RecordBean(int id, Date inputDate, double height, double weight, double temperature) {
+	public RecordBean(int id, LocalDate inputDate, double height, double weight, double temperature) {
 		this.id = id;
 		this.inputDate = inputDate;
 		this.height = height;
@@ -56,11 +60,11 @@ public class RecordBean {
 		this.userId = userId;
 	}
 
-	public Date getInputDate() {
+	public LocalDate getInputDate() {
 		return inputDate;
 	}
 
-	public void setInputDate(Date inputDate) {
+	public void setInputDate(LocalDate inputDate) {
 		this.inputDate = inputDate;
 	}
 
@@ -88,12 +92,12 @@ public class RecordBean {
 		this.temperature = temperature;
 	}
 
-	public String getText() {
-		return text;
+	public String getNote() {
+		return note;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 }

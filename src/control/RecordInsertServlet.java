@@ -1,13 +1,14 @@
 package control;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.RecordBean;
 import model.RecordDAO;
@@ -16,10 +17,10 @@ import model.RecordDAO;
 public class RecordInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//
+//	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -30,21 +31,37 @@ public class RecordInsertServlet extends HttpServlet {
 		//		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 		//		dispatcher.forward(request, response);
 
-		//HttpSessionインスタンス取得
-		HttpSession session = request.getSession();
 
-		//セッションスコープからインスタンスを取得
-		RecordBean rcBean = (RecordBean) session.getAttribute("rcBean");
-		//		int id = rcBean.getId();
-		//		String userId = rcBean.getUserId();
-		//		Date date = rcBean.getInputDate();
-		//		double height = rcBean.getHeight();
-		//		double weight = rcBean.getWeight();
-		//		String text = rcBean.getText();
+		request.setCharacterEncoding("UTF-8");
+		//リクエストパラメータを取得
+		String date = request.getParameter("date");
+		String height = request.getParameter("height");
+		String weight = request.getParameter("weight");
+		String note = request.getParameter("note");
+
+		//入力値をプロパティに設定
+		RecordBean rcBean = new RecordBean();
+		rcBean.setId(0);
+		rcBean.setUserId("admin");
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate localDate = LocalDate.parse(date, formatter);
+		rcBean.setInputDate(localDate); //LocalDate typeに変更
+
+		rcBean.setHeight(Double.parseDouble(height));
+		rcBean.setWeight(Double.parseDouble(weight));
+		rcBean.setNote(note);
+
+		//HttpSessionインスタンス取得
+//		HttpSession session = request.getSession();
+//		session.setAttribute("rcBean", rcBean);
+//
+//		//セッションスコープからインスタンスを取得
+//		RecordBean recordBean = (RecordBean) session.getAttribute("rcBean");
 
 		//DBへ保存
 		RecordDAO rcDao = new RecordDAO();
-		 int result = rcDao.insert(rcBean);
+		rcDao.insert(rcBean);
 
 		//成功時
 		response.sendRedirect("/recordList");

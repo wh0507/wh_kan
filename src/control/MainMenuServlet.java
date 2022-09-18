@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.RecordBean;
+
 @WebServlet("/mainMenu")
 public class MainMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,9 @@ public class MainMenuServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+
+		RecordBean rcBean = new RecordBean();
+		rcBean.setUserId("admin");
 
 		String forwardPath = null;
 

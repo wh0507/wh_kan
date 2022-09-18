@@ -1,38 +1,22 @@
-<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="model.RecordBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 ArrayList<RecordBean> lists = (ArrayList<RecordBean>) request.getAttribute("recordList");
+DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>記録一覧</title>
-<link href="<%=request.getContextPath()%>/css/style.css"
-	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
-	<table>
-		<%
-		for (RecordBean list : lists) {
-		%>
-		<tr>
-			<td><%=list.getInputDate()%></td>
-			<td><%=list.getHeight()%></td>
-			<td><%=list.getWeight()%></td>
-			<td><%=list.getTemperature()%></td>
-		</tr>
-		<%
-		}
-		%>
-	</table>
-
 	<table>
 		<tr>
 			<th>日付</th>
@@ -133,26 +117,19 @@ ArrayList<RecordBean> lists = (ArrayList<RecordBean>) request.getAttribute("reco
 			<th>体重(kg)</th>
 			<th>体温(°C)</th>
 		</tr>
+		<%
+		for (RecordBean list : lists) {
+			String datetimeformated = datetimeformatter.format(list.getInputDate());
+		%>
 		<tr>
-			<%
-			for (RecordBean list : lists) {
-			%>
-			<th>
-				<a href="/recordChange?no=3"><%=list.getInputDate()%></a>
-			</th>
+			<th><a href="/recordChange?no=3"><%=datetimeformated%></a></th>
 			<th><%=list.getHeight()%></th>
 			<th><%=list.getWeight()%></th>
 			<th><%=list.getTemperature()%></th>
-			<%
-			}
-			%>
 		</tr>
-		<tr>
-			<th>2020/06/03</th>
-			<th>165</th>
-			<th>73</th>
-			<th>36.5</th>
-		</tr>
+		<%
+		}
+		%>
 	</table>
 	<form action="/recordInput?" method="POST">
 		<button type="submit">新規登録</button>

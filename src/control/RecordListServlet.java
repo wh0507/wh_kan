@@ -29,6 +29,7 @@ public class RecordListServlet extends HttpServlet {
 		//DBから呼び出し
 		RecordDAO dao = new RecordDAO();
 		List<RecordBean> recordList = dao.selectOne("admin");
+
 		request.setAttribute("recordList", recordList);
 
 		//記録一覧画面へフォワード
@@ -36,7 +37,6 @@ public class RecordListServlet extends HttpServlet {
 		forwardPath = "/WEB-INF/jsp/recordList.jsp?no=1";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 		dispatcher.forward(request, response);
-
 	}
 
 }

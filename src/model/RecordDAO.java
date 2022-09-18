@@ -3,6 +3,7 @@ package model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,7 +13,6 @@ public class RecordDAO extends DBAccess {
 	ResultSet rs = null;
 
 	private static RecordDAO rcDao = new RecordDAO();
-
 	ArrayList<RecordBean> list = new ArrayList<>();
 
 	//条件検査呼び出し
@@ -27,15 +27,15 @@ public class RecordDAO extends DBAccess {
 			rs = pStmt.executeQuery();
 
 			while (rs.next()) {
-				Date inputDate = rs.getDate("input_date");
+				Date date = rs.getDate("input_date"); //①java.util.Dateで取得
 				double height = rs.getDouble("height");
 				double weight = rs.getDouble("weight");
 				double temperature = rs.getDouble("temperature");
 
-				RecordBean rcBean = new RecordBean(inputDate, height, weight, temperature);
+				LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate(); //②java.util.Date -> java.sql.Date -> LocalDate
+				RecordBean rcBean = new RecordBean(localDate, height, weight, temperature);
 				list.add(rcBean);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -62,18 +62,16 @@ public class RecordDAO extends DBAccess {
 			conn = rcDao.getConnection();
 
 			//SQL文作成
-			String sql = "INSERT INTO height_weight_record(input_date, height, weight, temperature, text) values(?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO height_weight_record(user_id, input_date, height, weight, temperature, note) values(?,?,?,?,?,?)";
+			//			String sql = "INSERT INTO height_weight_record values (?, input_date(?,'yyyy-mm-dd'), ?, ?, ?, ?)";
 			pStmt = conn.prepareStatement(sql);
 
-			Date date = new Date();
-
-			pStmt.setDate(1, (java.sql.Date) rcBean.getInputDate());
-			pStmt.setDouble(2, rcBean.getHeight());
-			pStmt.setDouble(3, rcBean.getWeight());
-			pStmt.setDouble(4, rcBean.getTemperature());
-
-			//ps.setDate(2, new java.sql.Date(heightweight.getInput_date().getTime()));
-
+			pStmt.setString(1, rcBean.getUserId());
+			pStmt.setDate(2, java.sql.Date.valueOf(rcBean.getInputDate()));
+			pStmt.setDouble(3, rcBean.getHeight());
+			pStmt.setDouble(4, rcBean.getWeight());
+			pStmt.setDouble(5, rcBean.getTemperature());
+			pStmt.setString(6, rcBean.getNote());
 
 			result = pStmt.executeUpdate(); //戻り値はint型で登録行数が返される。
 		} catch (SQLException e) {
@@ -152,6 +150,5 @@ public class RecordDAO extends DBAccess {
 			}
 		}
 		return result;
-
 	}
 }
