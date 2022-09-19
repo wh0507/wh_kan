@@ -28,7 +28,6 @@ public class RecordUpdateServlet extends HttpServlet {
 		//		dispatcher.forward(request, response);
 
 		request.setCharacterEncoding("UTF-8");
-		String aa = request.getParameter("id");
 		int id = Integer.parseInt(request.getParameter("id"));
 		double height = Double.parseDouble(request.getParameter("height"));
 		double weight = Double.parseDouble(request.getParameter("weight"));
