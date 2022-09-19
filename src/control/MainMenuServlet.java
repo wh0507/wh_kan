@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.RecordBean;
 
@@ -27,6 +28,9 @@ public class MainMenuServlet extends HttpServlet {
 
 		RecordBean rcBean = new RecordBean();
 		rcBean.setUserId("admin");
+
+		HttpSession session = request.getSession();
+		session.setAttribute("rcBean", rcBean);
 
 		String forwardPath = null;
 

@@ -13,8 +13,7 @@ String datetimeformated = datetimeformatter.format(date);
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="<%=request.getContextPath()%>/css/style.css"
-	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css">
 <title>登録画面</title>
 </head>
 <body>

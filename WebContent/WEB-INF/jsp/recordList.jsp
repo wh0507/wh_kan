@@ -1,7 +1,8 @@
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="model.RecordBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 ArrayList<RecordBean> lists = (ArrayList<RecordBean>) request.getAttribute("recordList");
 DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -11,7 +12,8 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 <head>
 <meta charset="UTF-8">
 <title>記録一覧</title>
-<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/style.css"
+	rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header>
@@ -81,7 +83,8 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 						<option value="29">29</option>
 						<option value="30">30</option>
 						<option value="31">31</option>
-					</select>日</td>
+					</select>日
+				</form></td>
 		</tr>
 	</table>
 	<table>
@@ -122,7 +125,8 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			String datetimeformated = datetimeformatter.format(list.getInputDate());
 		%>
 		<tr>
-			<th><a href="/recordChange?no=3"><%=datetimeformated%></a></th>
+			<!-- 詳細・更新画面へ遷移 -->
+			<th><a href="/recordChange?id=<%=list.getId()%>"><%=datetimeformated%></a></th>
 			<th><%=list.getHeight()%></th>
 			<th><%=list.getWeight()%></th>
 			<th><%=list.getTemperature()%></th>
@@ -131,7 +135,7 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		}
 		%>
 	</table>
-	<form action="/recordInput?" method="POST">
+	<form action="/recordInput" method="POST">
 		<button type="submit">新規登録</button>
 	</form>
 	<form action="/" method="GET">

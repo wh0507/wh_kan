@@ -14,10 +14,7 @@ public class RecordBean {
 
 	}
 
-	public RecordBean(String userId) {
-		this.userId = userId;
-	}
-
+	//findAll()
 	public RecordBean(int id, String userId, LocalDate inputDate, double height, double weight, double temperature,
 			String note) {
 		this.id = id;
@@ -29,20 +26,13 @@ public class RecordBean {
 		this.note = note;
 	}
 
-	public RecordBean(LocalDate inputDate, double height, double weight, double temperature) {
-		this.inputDate = inputDate;
-		this.height = height;
-		this.weight = weight;
-		this.temperature = temperature;
-	}
-
-	public RecordBean(int id, LocalDate inputDate, double height, double weight, double temperature) {
-		this.id = id;
-		this.inputDate = inputDate;
-		this.height = height;
-		this.weight = weight;
-		this.temperature = temperature;
-	}
+	//
+	//	public RecordBean(LocalDate inputDate, double height, double weight, double temperature) {
+	//		this.inputDate = inputDate;
+	//		this.height = height;
+	//		this.weight = weight;
+	//		this.temperature = temperature;
+	//	}
 
 	public int getId() {
 		return id;

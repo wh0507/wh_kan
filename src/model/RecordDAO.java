@@ -15,25 +15,27 @@ public class RecordDAO extends DBAccess {
 	private static RecordDAO rcDao = new RecordDAO();
 	ArrayList<RecordBean> list = new ArrayList<>();
 
-	//条件検査呼び出し
-	public ArrayList<RecordBean> selectOne(String userId) {
+	//記録一覧
+	public ArrayList<RecordBean> findAll() {
 		try {
 			//コネクト処理
 			conn = rcDao.getConnection();
 			//SQL文作成
-			String sql = "SELECT * FROM height_weight_record WHERE user_id=?";
+			String sql = "SELECT * FROM height_weight_record ";
 			pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, userId);
 			rs = pStmt.executeQuery();
 
 			while (rs.next()) {
+				int id = rs.getInt("id");
+				String userId = rs.getString("user_id");
 				Date date = rs.getDate("input_date"); //①java.util.Dateで取得
 				double height = rs.getDouble("height");
 				double weight = rs.getDouble("weight");
 				double temperature = rs.getDouble("temperature");
+				String note = rs.getString("note");
 
 				LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate(); //②java.util.Date -> java.sql.Date -> LocalDate
-				RecordBean rcBean = new RecordBean(localDate, height, weight, temperature);
+				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temperature, note);
 				list.add(rcBean);
 			}
 		} catch (SQLException e) {
@@ -90,27 +92,69 @@ public class RecordDAO extends DBAccess {
 		return result;
 	}
 
+	//条件検査呼び出し
+	public ArrayList<RecordBean> findById(int id) {
+		try {
+			//コネクト処理
+			conn = rcDao.getConnection();
+			//SQL文作成
+			String sql = "SELECT * FROM height_weight_record WHERE id=?";
+			pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, id);
+			rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				id = rs.getInt("id");
+				String userId = rs.getString("user_id");
+				Date date = rs.getDate("input_date");
+				double height = rs.getDouble("height");
+				double weight = rs.getDouble("weight");
+				double temperature = rs.getDouble("temperature");
+				String note = rs.getString("note");
+
+				LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
+				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temperature, note);
+				list.add(rcBean);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//切断処理
+			try {
+				if (rs != null)
+					rs.close();
+				if (pStmt != null)
+					pStmt.close();
+				if (rcDao != null)
+					rcDao.closeDBAccess();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
 	//13.更新
-	public int update(String id, String name, int kakaku) {
+	public int update(int id, double height, double weight, double temperature, String note) {
 		int result = 0;
 		try {
 			//コネクト処理
 			conn = rcDao.getConnection();
-
 			//SQL文作成
-			String sql = "UPDATE height_weight_record SET name=?, kakaku=? WHERE id=?";
+			String sql = "UPDATE height_weight_record SET height=?, weight=?, temperature=?, note=? WHERE id=? ";
 			pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, name);
-			pStmt.setInt(2, kakaku);
-			pStmt.setString(3, id);
+			pStmt.setDouble(1, height);
+			pStmt.setDouble(2, weight);
+			pStmt.setDouble(3, temperature);
+			pStmt.setString(4, note);
+			pStmt.setInt(5, id);
 
 			result = pStmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			//切断処理
 			try {
 				if (pStmt != null)
 					pStmt.close();

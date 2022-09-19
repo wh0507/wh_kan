@@ -31,17 +31,16 @@ public class RecordInsertServlet extends HttpServlet {
 		//		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 		//		dispatcher.forward(request, response);
 
-
 		request.setCharacterEncoding("UTF-8");
 		//リクエストパラメータを取得
 		String date = request.getParameter("date");
 		String height = request.getParameter("height");
 		String weight = request.getParameter("weight");
+		String temperature = request.getParameter("temperature");
 		String note = request.getParameter("note");
 
 		//入力値をプロパティに設定
 		RecordBean rcBean = new RecordBean();
-		rcBean.setId(0);
 		rcBean.setUserId("admin");
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -50,14 +49,8 @@ public class RecordInsertServlet extends HttpServlet {
 
 		rcBean.setHeight(Double.parseDouble(height));
 		rcBean.setWeight(Double.parseDouble(weight));
+		rcBean.setTemperature(Double.parseDouble(temperature));
 		rcBean.setNote(note);
-
-		//HttpSessionインスタンス取得
-//		HttpSession session = request.getSession();
-//		session.setAttribute("rcBean", rcBean);
-//
-//		//セッションスコープからインスタンスを取得
-//		RecordBean recordBean = (RecordBean) session.getAttribute("rcBean");
 
 		//DBへ保存
 		RecordDAO rcDao = new RecordDAO();
@@ -65,7 +58,6 @@ public class RecordInsertServlet extends HttpServlet {
 
 		//成功時
 		response.sendRedirect("/recordList");
-
 	}
 
 }

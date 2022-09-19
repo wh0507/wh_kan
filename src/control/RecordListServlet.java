@@ -28,7 +28,7 @@ public class RecordListServlet extends HttpServlet {
 
 		//DBから呼び出し
 		RecordDAO dao = new RecordDAO();
-		List<RecordBean> recordList = dao.selectOne("admin");
+		List<RecordBean> recordList = dao.findAll();
 
 		request.setAttribute("recordList", recordList);
 
