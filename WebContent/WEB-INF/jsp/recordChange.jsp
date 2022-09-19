@@ -1,9 +1,7 @@
 <%@page import="model.RecordBean"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -14,7 +12,8 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/style.css"
+	rel="stylesheet" type="text/css">
 <title>記録詳細画面</title>
 </head>
 <body>
@@ -25,8 +24,8 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	for (RecordBean list : lists) {
 		String datetimeformated = datetimeformatter.format(list.getInputDate());
 	%>
-	<form action="/recordUpdate?id=<%=list.getId()%>" method="post">
-<%-- 		<input type="hidden" name="id" value="<%= list.getId()%>"> --%>
+	<form action="/recordUpdate?id=<%=list.getId()%>" method="POST">
+		<%-- <input type="hidden" name="id" value="<%= list.getId()%>"> --%>
 		<table>
 			<tr>
 				<th>日付</th>
@@ -51,15 +50,15 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 				<th>備考</th>
 				<td><textarea name="note" cols="20" rows="5"><%=list.getNote()%></textarea></td>
 			</tr>
-			<%
-			}
-			%>
 		</table>
 		<button type="submit">更新</button>
 	</form>
-	<form action="/recordDelete" method="POST">
+	<form action="/recordDelete?id=<%=list.getId()%>" method="POST">
 		<button type="submit">削除</button>
 	</form>
+	<%
+	}
+	%>
 	<form action="/" method="GET">
 		<button type="submit">戻る</button>
 	</form>

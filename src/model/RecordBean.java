@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class RecordBean {
+public class RecordBean implements Serializable {
 
 	private int id;
 	private String userId;
@@ -14,7 +15,6 @@ public class RecordBean {
 
 	}
 
-	//findAll()
 	public RecordBean(int id, String userId, LocalDate inputDate, double height, double weight, double temperature,
 			String note) {
 		this.id = id;
@@ -25,14 +25,6 @@ public class RecordBean {
 		this.temperature = temperature;
 		this.note = note;
 	}
-
-	//
-	//	public RecordBean(LocalDate inputDate, double height, double weight, double temperature) {
-	//		this.inputDate = inputDate;
-	//		this.height = height;
-	//		this.weight = weight;
-	//		this.temperature = temperature;
-	//	}
 
 	public int getId() {
 		return id;

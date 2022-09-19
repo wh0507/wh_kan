@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import model.RecordBean;
 
+/**
+ * Mainコントローラー
+ */
 @WebServlet("/mainMenu")
 public class MainMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,13 +30,12 @@ public class MainMenuServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		RecordBean rcBean = new RecordBean();
-		rcBean.setUserId("admin");
+		rcBean.setUserId("admin"); //UserId = "admin"設定
 
 		HttpSession session = request.getSession();
 		session.setAttribute("rcBean", rcBean);
 
 		String forwardPath = null;
-
 		forwardPath = "/WEB-INF/jsp/mainMenu.jsp?no=0";
 		//MainMenuへフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);

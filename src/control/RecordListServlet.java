@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.RecordBean;
 import model.RecordDAO;
-
+/**
+ * 記録一覧コントローラー
+ */
 @WebServlet("/recordList")
 public class RecordListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,6 +33,10 @@ public class RecordListServlet extends HttpServlet {
 		List<RecordBean> recordList = dao.findAll();
 
 		request.setAttribute("recordList", recordList);
+
+		String[] chekcedList = request.getParameterValues("checkbox");
+		chekcedList.toString();
+
 
 		//記録一覧画面へフォワード
 		String forwardPath = null;

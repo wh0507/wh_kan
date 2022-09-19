@@ -1,3 +1,4 @@
+<%@page import="java.util.Iterator"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="model.RecordBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -5,6 +6,7 @@
 	pageEncoding="UTF-8"%>
 <%
 ArrayList<RecordBean> lists = (ArrayList<RecordBean>) request.getAttribute("recordList");
+Iterator<RecordBean> listAll = lists.iterator();
 DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 %>
 <!DOCTYPE html>
@@ -22,7 +24,7 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	<table>
 		<tr>
 			<th>日付</th>
-			<td><form action="" name="">
+			<td><form action="" name="year">
 					<select name="year">
 						<option value="">年(直近５)</option>
 						<option value="1900">1900</option>
@@ -32,7 +34,7 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 						<option value="1904">1904</option>
 					</select>年
 				</form></td>
-			<td><form action="" name="">
+			<td><form action="" name="month">
 					<select name="month">
 						<option value="">月</option>
 						<option value="1">1</option>
@@ -49,7 +51,7 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 						<option value="12">12</option>
 					</select>月
 				</form></td>
-			<td><form action="" name="">
+			<td><form action="" name="day">
 					<select name="day">
 						<option value="">日</option>
 						<option value="1">1</option>
@@ -107,12 +109,12 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			<td><input type="text"></td>
 		</tr>
 	</table>
-	<div>
-		<input type="checkbox"> <label for="checkbox">日付の古い順に表示する</label>
+	<div><form action="/recordList" method="POST">
+			<input type="checkbox" name="checkbox" value="<%=lists%>">
+			日付の古い順に表示する
+			<button type="submit">検索</button>
+		</form>
 	</div>
-	<form action="/" method="GET">
-		<button type="submit">検索</button>
-	</form>
 	<table>
 		<tr>
 			<th>日付</th>

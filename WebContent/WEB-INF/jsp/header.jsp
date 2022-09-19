@@ -10,25 +10,21 @@ String no = (String) request.getParameter("no");
 <title>Insert title here</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	>
+	rel="stylesheet">
 </head>
 <body>
 	<nav aria-label="Breadcrumb" class="breadcrumb">
 		<ul>
 			<% if (no.equals("0")) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
-			<% } %>
-			<% if (no.equals("1")) { %>
+			<% } else if (no.equals("1")) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
 			<li><a href="/recordList">記録一覧</a></li>
-			<% } %>
-			<% if (no.equals("2")) { %>
+			<% } else if (no.equals("2")) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
 			<li><a href="/recordList">記録一覧</a></li>
 			<li><a href="/recordInput">記録入力</a></li>
-			<% } %>
-			<% if (no.equals("3")) { %>
+			<% } else if (no.equals("3")) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
 			<li><a href="/recordList">記録一覧</a></li>
 			<li><a href="/recordChange">記録詳細</a></li>

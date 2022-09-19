@@ -12,17 +12,17 @@ public class RecordDAO extends DBAccess {
 	PreparedStatement pStmt = null;
 	ResultSet rs = null;
 
-	private static RecordDAO rcDao = new RecordDAO();
+	private static RecordDAO rcDao = new RecordDAO(); //daoインスタンス
 	ArrayList<RecordBean> list = new ArrayList<>();
 
 	//記録一覧
 	public ArrayList<RecordBean> findAll() {
 		try {
-			//コネクト処理
-			conn = rcDao.getConnection();
+			conn = rcDao.getConnection(); //コネクト処理
 			//SQL文作成
 			String sql = "SELECT * FROM height_weight_record ";
 			pStmt = conn.prepareStatement(sql);
+
 			rs = pStmt.executeQuery();
 
 			while (rs.next()) {
@@ -39,9 +39,8 @@ public class RecordDAO extends DBAccess {
 				list.add(rcBean);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("SELECTエラー：" + e.getMessage());
 		} finally {
-			//切断処理
 			try {
 				if (rs != null)
 					rs.close();
@@ -56,16 +55,14 @@ public class RecordDAO extends DBAccess {
 		return list;
 	}
 
-	//登録
+	//記録の登録
 	public int insert(RecordBean rcBean) {
 		int result = 0;
 		try {
-			//コネクト処理
 			conn = rcDao.getConnection();
 
 			//SQL文作成
 			String sql = "INSERT INTO height_weight_record(user_id, input_date, height, weight, temperature, note) values(?,?,?,?,?,?)";
-			//			String sql = "INSERT INTO height_weight_record values (?, input_date(?,'yyyy-mm-dd'), ?, ?, ?, ?)";
 			pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, rcBean.getUserId());
@@ -75,11 +72,11 @@ public class RecordDAO extends DBAccess {
 			pStmt.setDouble(5, rcBean.getTemperature());
 			pStmt.setString(6, rcBean.getNote());
 
-			result = pStmt.executeUpdate(); //戻り値はint型で登録行数が返される。
+			result = pStmt.executeUpdate();
+
 		} catch (SQLException e) {
 			System.out.println("INSERTエラー：" + e.getMessage());
 		} finally {
-			//切断処理
 			try {
 				if (pStmt != null)
 					pStmt.close();
@@ -92,15 +89,16 @@ public class RecordDAO extends DBAccess {
 		return result;
 	}
 
-	//条件検査呼び出し
+	//記録の条件検査呼び出し
 	public ArrayList<RecordBean> findById(int id) {
 		try {
-			//コネクト処理
 			conn = rcDao.getConnection();
+
 			//SQL文作成
 			String sql = "SELECT * FROM height_weight_record WHERE id=?";
 			pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, id);
+
 			rs = pStmt.executeQuery();
 
 			while (rs.next()) {
@@ -117,9 +115,8 @@ public class RecordDAO extends DBAccess {
 				list.add(rcBean);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("SELECT(findById)エラー：" + e.getMessage());
 		} finally {
-			//切断処理
 			try {
 				if (rs != null)
 					rs.close();
@@ -134,12 +131,12 @@ public class RecordDAO extends DBAccess {
 		return list;
 	}
 
-	//13.更新
+	//記録の修正・更新
 	public int update(int id, double height, double weight, double temperature, String note) {
 		int result = 0;
 		try {
-			//コネクト処理
 			conn = rcDao.getConnection();
+
 			//SQL文作成
 			String sql = "UPDATE height_weight_record SET height=?, weight=?, temperature=?, note=? WHERE id=? ";
 			pStmt = conn.prepareStatement(sql);
@@ -153,7 +150,7 @@ public class RecordDAO extends DBAccess {
 			result = pStmt.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("UPDATEエラー：" + e.getMessage());
 		} finally {
 			try {
 				if (pStmt != null)
@@ -167,23 +164,21 @@ public class RecordDAO extends DBAccess {
 		return result;
 	}
 
-	//削除
-	public int delete(String id) {
+	//記録の削除
+	public int delete(int id) {
 		int result = 0;
 		try {
-			//コネクト処理
 			conn = rcDao.getConnection();
 
-			//SQL文作成
 			String sql = "DELETE FROM height_weight_record WHERE id=?";
 			pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, id);
+			pStmt.setInt(1, id);
 
 			result = pStmt.executeUpdate();
+
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("DELETEエラー：" + e.getMessage());
 		} finally {
-			//切断処理
 			try {
 				if (pStmt != null)
 					pStmt.close();
