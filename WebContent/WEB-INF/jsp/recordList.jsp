@@ -5,8 +5,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-ArrayList<RecordBean> lists = (ArrayList<RecordBean>) request.getAttribute("recordList");
-Iterator<RecordBean> listAll = lists.iterator();
+ArrayList<RecordBean> lists = null;
+if (request.getAttribute("dateList") == null) {
+	lists = (ArrayList<RecordBean>) request.getAttribute("recordList");
+} else if (request.getAttribute("dateList") != null) {
+	lists = (ArrayList<RecordBean>) request.getAttribute("dateList");
+}
+/* Iterator<RecordBean> listAll = lists.iterator(); */
 DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 %>
 <!DOCTYPE html>
@@ -109,9 +114,9 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			<td><input type="text"></td>
 		</tr>
 	</table>
-	<div><form action="/recordList" method="POST">
-			<input type="checkbox" name="checkbox" value="<%=lists%>">
-			日付の古い順に表示する
+	<div>
+		<form action="/recordList" method="POST">
+			<input type="checkbox" name="checkbox" value=""> 日付の古い順に表示する
 			<button type="submit">検索</button>
 		</form>
 	</div>

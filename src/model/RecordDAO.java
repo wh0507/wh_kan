@@ -190,4 +190,43 @@ public class RecordDAO extends DBAccess {
 		}
 		return result;
 	}
+
+	public ArrayList<RecordBean> findByDate() {
+		try {
+			conn = rcDao.getConnection(); //コネクト処理
+			//SQL文作成
+			String sql = "SELECT * FROM height_weight_record ORDER BY input_date ASC";
+			pStmt = conn.prepareStatement(sql);
+
+			rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String userId = rs.getString("user_id");
+				Date date = rs.getDate("input_date"); //①java.util.Dateで取得
+				double height = rs.getDouble("height");
+				double weight = rs.getDouble("weight");
+				double temperature = rs.getDouble("temperature");
+				String note = rs.getString("note");
+
+				LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate(); //②java.util.Date -> java.sql.Date -> LocalDate
+				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temperature, note);
+				list.add(rcBean);
+			}
+		} catch (SQLException e) {
+			System.out.println("SELECT(findDateASC)エラー：" + e.getMessage());
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pStmt != null)
+					pStmt.close();
+				if (rcDao != null)
+					rcDao.closeDBAccess();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 }

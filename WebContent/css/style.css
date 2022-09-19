@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
-.breadcrumb {
+.breadcrumb a{
 	padding: 0 .5rem;
+	text-decoration: none;
 }
 
 .breadcrumb ul {

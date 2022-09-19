@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.RecordBean;
 import model.RecordDAO;
+
 /**
  * 記録一覧コントローラー
  */
@@ -30,13 +31,16 @@ public class RecordListServlet extends HttpServlet {
 
 		//DBから呼び出し
 		RecordDAO dao = new RecordDAO();
-		List<RecordBean> recordList = dao.findAll();
 
-		request.setAttribute("recordList", recordList);
-
-		String[] chekcedList = request.getParameterValues("checkbox");
-		chekcedList.toString();
-
+		//checkbox確認
+		String checked = request.getParameter("checkbox");
+		if (checked == null) {
+			List<RecordBean> recordList = dao.findAll();
+			request.setAttribute("recordList", recordList);
+		} else if (checked != null) {
+			List<RecordBean> dateList = dao.findByDate();
+			request.setAttribute("dateList", dateList);
+		}
 
 		//記録一覧画面へフォワード
 		String forwardPath = null;
