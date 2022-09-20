@@ -57,8 +57,7 @@ public class RecordDAO extends DBAccess {
 	}
 
 	//記録の登録
-	public int insert(RecordBean rcBean) {
-		int result = 0;
+	public boolean insert(RecordBean rcBean) {
 		try {
 			conn = rcDao.getConnection();
 
@@ -73,7 +72,11 @@ public class RecordDAO extends DBAccess {
 			pStmt.setDouble(5, rcBean.getTemperature());
 			pStmt.setString(6, rcBean.getNote());
 
-			result = pStmt.executeUpdate();
+			int result = pStmt.executeUpdate();
+
+			if (result != 1) {
+				return false;
+			}
 
 		} catch (SQLException e) {
 			System.out.println("INSERTエラー：" + e.getMessage());
@@ -87,7 +90,7 @@ public class RecordDAO extends DBAccess {
 				e.printStackTrace();
 			}
 		}
-		return result;
+		return true;
 	}
 
 	//記録の条件検査呼び出し

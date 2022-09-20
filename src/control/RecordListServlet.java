@@ -46,8 +46,8 @@ public class RecordListServlet extends HttpServlet {
 		String strWeightFrom = request.getParameter("weightFrom");
 		String strWeightTo = request.getParameter("weightTo");
 		//体温
-		String strTemperatureFrom = request.getParameter("temperatureFrom");
-		String strTemperatureTo = request.getParameter("temperatureTo");
+		String strTempFrom = request.getParameter("tempFrom");
+		String strTempTo = request.getParameter("tempTo");
 
 		//チェックボックス
 		String checked = request.getParameter("checkbox");

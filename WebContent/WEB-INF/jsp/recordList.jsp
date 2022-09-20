@@ -101,9 +101,9 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			</tr>
 			<tr>
 				<th>体温</th>
-				<td><input type="text" name="temperatureFrom"></td>
+				<td><input type="text" name="tempFrom"></td>
 				<td>~</td>
-				<td><input type="text" name="temperatureTo"></td>
+				<td><input type="text" name="tempTo"></td>
 			</tr>
 		</table>
 		<input type="checkbox" name="checkbox" value=""> 日付の古い順に表示する
