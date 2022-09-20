@@ -49,15 +49,8 @@ public class RecordListServlet extends HttpServlet {
 		String strTemperatureFrom = request.getParameter("temperatureFrom");
 		String strTemperatureTo = request.getParameter("temperatureTo");
 
-		if( strHeightFrom.isEmpty()) {
-
-		}
-
 		//チェックボックス
 		String checked = request.getParameter("checkbox");
-
-
-
 
 		//記録一覧画面へフォワード
 		String forwardPath = null;

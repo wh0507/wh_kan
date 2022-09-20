@@ -22,6 +22,7 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
+	<p>ErrorMessage</p>
 	<form action="/recordList" method="POST">
 		<table>
 			<tr>
