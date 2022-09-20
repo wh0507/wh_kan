@@ -8,10 +8,11 @@ String no = (String) request.getParameter("no");
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link
+<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css">
+<!-- <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-</head>
+</head> -->
 <body>
 	<nav aria-label="Breadcrumb" class="breadcrumb">
 		<ul>

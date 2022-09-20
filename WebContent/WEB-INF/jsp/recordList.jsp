@@ -26,21 +26,19 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
-	<table>
-		<tr>
-			<th>日付</th>
-			<td><form action="" name="year">
-					<select name="year">
+	<form action="" name="year">
+		<table>
+			<tr>
+				<th>日付</th>
+				<td><select name="year">
 						<option value="">年(直近５)</option>
-						<option value="1900">1900</option>
-						<option value="1901">1901</option>
-						<option value="1902">1902</option>
-						<option value="1903">1903</option>
-						<option value="1904">1904</option>
-					</select>年
-				</form></td>
-			<td><form action="" name="month">
-					<select name="month">
+						<option value="2022">2022</option>
+						<option value="2021">2021</option>
+						<option value="2020">2020</option>
+						<option value="2019">2019</option>
+						<option value="2018">2018</option>
+				</select>年</td>
+				<td><select name="month">
 						<option value="">月</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -54,10 +52,8 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 						<option value="10">10</option>
 						<option value="11">11</option>
 						<option value="12">12</option>
-					</select>月
-				</form></td>
-			<td><form action="" name="day">
-					<select name="day">
+				</select>月</td>
+				<td><select name="day">
 						<option value="">日</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -90,10 +86,10 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 						<option value="29">29</option>
 						<option value="30">30</option>
 						<option value="31">31</option>
-					</select>日
-				</form></td>
-		</tr>
-	</table>
+				</select>日</td>
+			</tr>
+		</table>
+	</form>
 	<table>
 		<tr>
 			<th>身長</th>
