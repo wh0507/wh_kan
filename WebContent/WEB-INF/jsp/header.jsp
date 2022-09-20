@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-String no = (String) request.getParameter("no");
+int no = Integer.parseInt(request.getParameter("no"));
 %>
 <!DOCTYPE html>
 <html>
@@ -16,16 +16,16 @@ String no = (String) request.getParameter("no");
 <body>
 	<nav aria-label="Breadcrumb" class="breadcrumb">
 		<ul>
-			<% if (no.equals("0")) { %>
+			<% if (no == 0) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
-			<% } else if (no.equals("1")) { %>
+			<% } else if (no==1) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
 			<li><a href="/recordList">記録一覧</a></li>
-			<% } else if (no.equals("2")) { %>
+			<% } else if (no==2) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
 			<li><a href="/recordList">記録一覧</a></li>
 			<li><a href="/recordInput">記録入力</a></li>
-			<% } else if (no.equals("3")) { %>
+			<% } else if (no==3) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
 			<li><a href="/recordList">記録一覧</a></li>
 			<li><a href="/recordChange">記録詳細</a></li>

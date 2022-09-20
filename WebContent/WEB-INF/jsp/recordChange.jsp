@@ -33,17 +33,20 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			</tr>
 			<tr>
 				<th>身長</th>
-				<td><input type="text" name="height" value="<%=list.getHeight()%>"></td>
+				<td><input type="text" name="height"
+					value="<%=list.getHeight()%>"></td>
 				<td>cm</td>
 			</tr>
 			<tr>
 				<th>体重</th>
-				<td><input type="text" name="weight" value="<%=list.getWeight()%>"></td>
+				<td><input type="text" name="weight"
+					value="<%=list.getWeight()%>"></td>
 				<td>kg</td>
 			</tr>
 			<tr>
 				<th>体温</th>
-				<td><input type="text" name="temperature" value="<%=list.getTemperature()%>"></td>
+				<td><input type="text" name="temperature"
+					value="<%=list.getTemperature()%>"></td>
 				<td>℃</td>
 			</tr>
 			<tr>
@@ -60,7 +63,7 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	}
 	%>
 	<form action="/" method="GET">
-		<button type="submit">戻る</button>
+		<input type="button" value="戻る" onclick="history.back()">
 	</form>
 
 </body>

@@ -5,12 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-ArrayList<RecordBean> lists = null;
-if (request.getAttribute("dateList") == null) {
-	lists = (ArrayList<RecordBean>) request.getAttribute("recordList");
-} else if (request.getAttribute("dateList") != null) {
-	lists = (ArrayList<RecordBean>) request.getAttribute("dateList");
-}
+ArrayList<RecordBean> lists = (ArrayList<RecordBean>) request.getAttribute("recordList");
+
 /* Iterator<RecordBean> listAll = lists.iterator(); */
 DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 %>
@@ -26,12 +22,12 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
-	<form action="" name="year">
+	<form action="/recordList" method="POST">
 		<table>
 			<tr>
 				<th>日付</th>
 				<td><select name="year">
-						<option value="">年(直近５)</option>
+						<option value="">年(直近)</option>
 						<option value="2022">2022</option>
 						<option value="2021">2021</option>
 						<option value="2020">2020</option>
@@ -89,33 +85,30 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 				</select>日</td>
 			</tr>
 		</table>
+		<table>
+			<tr>
+				<th>身長</th>
+				<td><input type="text" name="heightFrom"></td>
+				<td>~</td>
+				<td><input type="text" name="heightTo"></td>
+			</tr>
+			<tr>
+				<th>体重</th>
+				<td><input type="text" name="weightFrom"></td>
+				<td>~</td>
+				<td><input type="text" name="weightTo"></td>
+			</tr>
+			<tr>
+				<th>体温</th>
+				<td><input type="text" name="temperatureFrom"></td>
+				<td>~</td>
+				<td><input type="text" name="temperatureTo"></td>
+			</tr>
+		</table>
+		<input type="checkbox" name="checkbox" value=""> 日付の古い順に表示する
+		<button type="submit">検索</button>
 	</form>
-	<table>
-		<tr>
-			<th>身長</th>
-			<td><input type="text"></td>
-			<td>~</td>
-			<td><input type="text"></td>
-		</tr>
-		<tr>
-			<th>体重</th>
-			<td><input type="text"></td>
-			<td>~</td>
-			<td><input type="text"></td>
-		</tr>
-		<tr>
-			<th>体温</th>
-			<td><input type="text"></td>
-			<td>~</td>
-			<td><input type="text"></td>
-		</tr>
-	</table>
-	<div>
-		<form action="/recordList" method="POST">
-			<input type="checkbox" name="checkbox" value=""> 日付の古い順に表示する
-			<button type="submit">検索</button>
-		</form>
-	</div>
+
 	<table>
 		<tr>
 			<th>日付</th>
@@ -142,7 +135,7 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		<button type="submit">新規登録</button>
 	</form>
 	<form action="/" method="GET">
-		<button type="submit">戻る</button>
+		<input type="button" value="戻る" onclick="history.back()">
 	</form>
 </body>
 </html>

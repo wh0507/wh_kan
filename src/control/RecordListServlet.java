@@ -31,16 +31,33 @@ public class RecordListServlet extends HttpServlet {
 
 		//DBから呼び出し
 		RecordDAO dao = new RecordDAO();
+		List<RecordBean> recordList = dao.findAll();
+		request.setAttribute("recordList", recordList);
 
-		//checkbox確認
-		String checked = request.getParameter("checkbox");
-		if (checked == null) {
-			List<RecordBean> recordList = dao.findAll();
-			request.setAttribute("recordList", recordList);
-		} else if (checked != null) {
-			List<RecordBean> dateList = dao.findByDate();
-			request.setAttribute("dateList", dateList);
+		//日付
+		String[] year = request.getParameterValues("year");
+		String[] month = request.getParameterValues("month");
+		String[] day = request.getParameterValues("day");
+
+		//身長
+		String strHeightFrom = request.getParameter("heightFrom");
+		String strHeightTo = request.getParameter("heightTo");
+		//体重
+		String strWeightFrom = request.getParameter("weightFrom");
+		String strWeightTo = request.getParameter("weightTo");
+		//体温
+		String strTemperatureFrom = request.getParameter("temperatureFrom");
+		String strTemperatureTo = request.getParameter("temperatureTo");
+
+		if( strHeightFrom.isEmpty()) {
+
 		}
+
+		//チェックボックス
+		String checked = request.getParameter("checkbox");
+
+
+
 
 		//記録一覧画面へフォワード
 		String forwardPath = null;

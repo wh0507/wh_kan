@@ -13,7 +13,8 @@ String datetimeformated = datetimeformatter.format(date);
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/style.css"
+	rel="stylesheet" type="text/css">
 <title>登録画面</title>
 </head>
 <body>
@@ -49,7 +50,7 @@ String datetimeformated = datetimeformatter.format(date);
 		<button type="submit">登録</button>
 	</form>
 	<form action="/" method="GET">
-		<button type="submit">戻る</button>
+		<input type="button" value="戻る" onclick="history.back()">
 	</form>
 
 </body>
