@@ -10,7 +10,10 @@
 LocalDate date = LocalDate.now();
 DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 String datetimeformated = datetimeformatter.format(date);
-List<String> msgList = (ArrayList<String>) request.getAttribute("msgList");
+String msgList = (String) request.getAttribute("msg");
+if (msgList == null) {
+	msgList = "";
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -24,18 +27,7 @@ List<String> msgList = (ArrayList<String>) request.getAttribute("msgList");
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
-	<%
-	if (request.getAttribute("msgList") != null) {
-		for (String list : msgList) {
-	%>
-	<%=list%><br>
-	<%
-	}
-	msgList.clear();
-	%>
-	<%
-	}
-	%>
+	<%=msgList%><br>
 	<form action="/recordInsert" method="GET">
 		<table>
 			<tr>

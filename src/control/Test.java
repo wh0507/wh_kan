@@ -16,6 +16,10 @@ public class Test {
 		sbSql.append("FROM height_weight_record");
 		sbSql.append(" WHERE user_id = ?");
 //
+//		if (weight.indexOf(".") == -1) {
+//			weight += ".0";
+//		}
+//
 //		if(serchCondition == null) {
 //			//ソート
 //			sbSql.append(" ORDER BY input_date DESC");

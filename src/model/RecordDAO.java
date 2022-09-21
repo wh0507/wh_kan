@@ -32,11 +32,11 @@ public class RecordDAO extends DBAccess {
 				Date date = rs.getDate("input_date"); //①java.util.Dateで取得
 				double height = rs.getDouble("height");
 				double weight = rs.getDouble("weight");
-				double temperature = rs.getDouble("temperature");
+				double temp = rs.getDouble("temperature");
 				String note = rs.getString("note");
 
 				LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate(); //②java.util.Date -> java.sql.Date -> LocalDate
-				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temperature, note);
+				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temp, note);
 				list.add(rcBean);
 			}
 		} catch (SQLException e) {
@@ -111,11 +111,11 @@ public class RecordDAO extends DBAccess {
 				Date date = rs.getDate("input_date");
 				double height = rs.getDouble("height");
 				double weight = rs.getDouble("weight");
-				double temperature = rs.getDouble("temperature");
+				double temp = rs.getDouble("temperature");
 				String note = rs.getString("note");
 
 				LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
-				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temperature, note);
+				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temp, note);
 				list.add(rcBean);
 			}
 		} catch (SQLException e) {
@@ -136,7 +136,7 @@ public class RecordDAO extends DBAccess {
 	}
 
 	//記録の修正・更新
-	public int update(int id, double height, double weight, double temperature, String note) {
+	public int update(int id, double height, double weight, double temp, String note) {
 		int result = 0;
 		try {
 			conn = rcDao.getConnection();
@@ -147,7 +147,7 @@ public class RecordDAO extends DBAccess {
 
 			pStmt.setDouble(1, height);
 			pStmt.setDouble(2, weight);
-			pStmt.setDouble(3, temperature);
+			pStmt.setDouble(3, temp);
 			pStmt.setString(4, note);
 			pStmt.setInt(5, id);
 
@@ -210,11 +210,11 @@ public class RecordDAO extends DBAccess {
 				Date date = rs.getDate("input_date"); //①java.util.Dateで取得
 				double height = rs.getDouble("height");
 				double weight = rs.getDouble("weight");
-				double temperature = rs.getDouble("temperature");
+				double temp = rs.getDouble("temperature");
 				String note = rs.getString("note");
 
 				LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate(); //②java.util.Date -> java.sql.Date -> LocalDate
-				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temperature, note);
+				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temp, note);
 				list.add(rcBean);
 			}
 		} catch (SQLException e) {
@@ -254,11 +254,11 @@ public class RecordDAO extends DBAccess {
 				Date date = rs.getDate("input_date");
 				double height = rs.getDouble("height");
 				double weight = rs.getDouble("weight");
-				double temperature = rs.getDouble("temperature");
+				double temp = rs.getDouble("temperature");
 				String note = rs.getString("note");
 
 				LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
-				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temperature, note);
+				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temp, note);
 				list.add(rcBean);
 			}
 		} catch (SQLException e) {

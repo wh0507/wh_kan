@@ -3,8 +3,6 @@ package control;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,56 +26,25 @@ public class RecordInsertServlet extends HttpServlet {
 		Errcheck errcheck = new Errcheck();
 		String msg = "";
 
-		List<String> msgList = new ArrayList<String>();
-
 		//リクエストパラメータを取得
 		String date = request.getParameter("date");
 		msg = errcheck.dateCheck(date);
-		if (!msg.isEmpty() == true) {
-			msgList.add(msg);
-		}
 
 		String height = request.getParameter("height");
-		if (height.indexOf(".") == -1) {
-			height += ".0";
-		}
-
-		if (height.isEmpty() || height != null) {
-			msg = errcheck.heightCheck(height);
-			msgList.add(msg);
-		}
+		msg = errcheck.heightCheck(height);
 
 		String weight = request.getParameter("weight");
-		if (weight.indexOf(".") == -1) {
-			weight += ".0";
-		}
-		if (weight.isEmpty() || weight != null) {
-			msg = errcheck.weightCheck(weight);
-			msgList.add(msg);
-		}
+		msg = errcheck.weightCheck(weight);
 
 		String temp = request.getParameter("temp");
-		if (temp.indexOf(".") == -1) {
-			temp += ".0";
-		}
-		if (temp.isEmpty() || temp != null) {
-			msg = errcheck.tempCheck(temp);
-			msgList.add(msg);
-		}
+		msg = errcheck.tempCheck(temp);
 
-		String note = request.getParameter("note");
-		if (temp == null) {
-			note = "";
-			msgList.add(msg);
-		}
-
-		if (msgList.isEmpty() == false) {
+		if (!msg.isEmpty()) {
 			//失敗時
-			request.setAttribute("msgList", msgList);
+			request.setAttribute("msg", msg);
 
 			String forwardPath = null;
 			forwardPath = "/recordInput";
-			//MainMenuへフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 			dispatcher.forward(request, response);
 		} else {
@@ -91,7 +58,7 @@ public class RecordInsertServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
-		//		//リクエストパラメータを取得
+		//リクエストパラメータを取得
 		String date = request.getParameter("date");
 		String height = request.getParameter("height");
 		String weight = request.getParameter("weight");
@@ -103,7 +70,7 @@ public class RecordInsertServlet extends HttpServlet {
 		rcBean.setUserId("admin");
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		LocalDate localDate = LocalDate.parse(date, formatter); //
+		LocalDate localDate = LocalDate.parse(date, formatter);
 
 		rcBean.setInputDate(localDate); //LocalDate typeに変更
 		rcBean.setHeight(Double.parseDouble(height));

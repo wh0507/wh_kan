@@ -14,13 +14,20 @@ import model.RecordBean;
 import model.RecordDAO;
 
 /**
- * Servlet implementation class RecordChangeServlet
+ * 記録詳細・更新コントローラー
  */
 @WebServlet("/recordChange")
 public class RecordChangeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doPost(request, response);
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
@@ -37,13 +44,6 @@ public class RecordChangeServlet extends HttpServlet {
 		//MainMenuへフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 		dispatcher.forward(request, response);
-
-		//		doPost(request, response);
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
 	}
 

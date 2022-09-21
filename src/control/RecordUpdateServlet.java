@@ -2,16 +2,18 @@ package control;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Errcheck;
 import model.RecordDAO;
 
 /**
- * Servlet implementation class RecordUpdateServlet
+ *UPDATEコントローラー
  */
 @WebServlet("/recordUpdate")
 public class RecordUpdateServlet extends HttpServlet {
@@ -20,28 +22,47 @@ public class RecordUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//		//失敗時
-		//		String forwardPath = null;
-		//		forwardPath = "/recordChange";
-		//		//MainMenuへフォワード
-		//		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-		//		dispatcher.forward(request, response);
+		Errcheck errcheck = new Errcheck();
+		String msg = "";
 
-		request.setCharacterEncoding("UTF-8");
-		int id = Integer.parseInt(request.getParameter("id"));
-		double height = Double.parseDouble(request.getParameter("height"));
-		double weight = Double.parseDouble(request.getParameter("weight"));
-		double temperature = Double.parseDouble(request.getParameter("temperature"));
-		String note = request.getParameter("note");
+		//		String date = request.getParameter("date");
 
-		//		ArrayList<RecordBean> rcBean = new ArrayList<RecordBean>();
-		RecordDAO rcDao = new RecordDAO();
-		rcDao.update(id, height, weight, temperature, note);
+		String height = request.getParameter("height");
+		msg = errcheck.heightCheck(height);
 
-		//		request.setAttribute("rcBean", rcBean);
+		String weight = request.getParameter("weight");
+		msg = errcheck.weightCheck(weight);
 
-		//成功時
-		response.sendRedirect("/recordList");
+		String temp = request.getParameter("temp");
+		msg = errcheck.tempCheck(temp);
+
+		if (!msg.isEmpty()) {
+			//失敗時
+			request.setAttribute("msg", msg);
+
+			String forwardPath = null;
+			forwardPath = "/recordChange";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+			dispatcher.forward(request, response);
+
+		} else {
+
+			request.setCharacterEncoding("UTF-8");
+			int id = Integer.parseInt(request.getParameter("id"));
+			double height1 = Double.parseDouble(request.getParameter("height"));
+			double weight1 = Double.parseDouble(request.getParameter("weight"));
+			double temp1 = Double.parseDouble(request.getParameter("temp"));
+			String note = request.getParameter("note");
+
+			//		ArrayList<RecordBean> rcBean = new ArrayList<RecordBean>();
+			RecordDAO rcDao = new RecordDAO();
+			rcDao.update(id, height1, weight1, temp1, note);
+
+			//		request.setAttribute("rcBean", rcBean);
+
+			//成功時
+			response.sendRedirect("/recordList");
+		}
 
 	}
 

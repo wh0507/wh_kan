@@ -7,6 +7,10 @@
 <%
 ArrayList<RecordBean> lists = (ArrayList<RecordBean>) request.getAttribute("rcBean");
 DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+String msgList = (String) request.getAttribute("msg");
+if (msgList == null) {
+	msgList = "";
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -20,6 +24,7 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
+	<%=msgList%><br>
 	<%
 	for (RecordBean list : lists) {
 		String datetimeformated = datetimeformatter.format(list.getInputDate());
@@ -33,20 +38,17 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			</tr>
 			<tr>
 				<th>身長</th>
-				<td><input type="text" name="height"
-					value="<%=list.getHeight()%>"></td>
+				<td><input type="text" name="height" value="<%=list.getHeight()%>"></td>
 				<td>cm</td>
 			</tr>
 			<tr>
 				<th>体重</th>
-				<td><input type="text" name="weight"
-					value="<%=list.getWeight()%>"></td>
+				<td><input type="text" name="weight" value="<%=list.getWeight()%>"></td>
 				<td>kg</td>
 			</tr>
 			<tr>
 				<th>体温</th>
-				<td><input type="text" name="temperature"
-					value="<%=list.getTemperature()%>"></td>
+				<td><input type="text" name="temp" value="<%=list.getTemperature()%>"></td>
 				<td>℃</td>
 			</tr>
 			<tr>
