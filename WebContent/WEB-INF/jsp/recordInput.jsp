@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.Date"%>
@@ -8,6 +10,7 @@
 LocalDate date = LocalDate.now();
 DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 String datetimeformated = datetimeformatter.format(date);
+List<String> msgList = (ArrayList<String>) request.getAttribute("msgList");
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +24,19 @@ String datetimeformated = datetimeformatter.format(date);
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
-	<form action="/recordInsert" method="post">
+	<%
+	if (request.getAttribute("msgList") != null) {
+		for (String list : msgList) {
+	%>
+	<%=list%><br>
+	<%
+	}
+	msgList.clear();
+	%>
+	<%
+	}
+	%>
+	<form action="/recordInsert" method="GET">
 		<table>
 			<tr>
 				<th>日付</th>
@@ -39,7 +54,7 @@ String datetimeformated = datetimeformatter.format(date);
 			</tr>
 			<tr>
 				<th>体温</th>
-				<td><input type="text" name="temperature"></td>
+				<td><input type="text" name="temp"></td>
 				<td>℃</td>
 			</tr>
 			<tr>

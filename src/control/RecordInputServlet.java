@@ -21,7 +21,6 @@ public class RecordInputServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String forwardPath = null;
 		forwardPath = "/WEB-INF/jsp/recordInput.jsp?no=2";
 		//MainMenuへフォワード

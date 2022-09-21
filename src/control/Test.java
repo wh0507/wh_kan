@@ -25,7 +25,19 @@ public class Test {
 //
 //			}
 //		}
-
+//
+//		String num = "10";
+//
+//		if(num.indexOf(".") == -1) {
+//			num += ".0";
+//			}
+//
+//			if(!Pattern.matches("^[0-9]{1,3}\\.{1}[0-9]{1}$",num)) {
+//			msg = date + "は半角数値で入力してください";
+//			} else {
+//			msg = from_to(date,num,num2);
+//			}
+//
 	}
 
 }
