@@ -195,6 +195,7 @@ public class RecordDAO extends DBAccess {
 		return result;
 	}
 
+	//データ確認
 	public ArrayList<RecordBean> findByDate() {
 		try {
 			conn = rcDao.getConnection(); //コネクト処理
@@ -234,48 +235,48 @@ public class RecordDAO extends DBAccess {
 		return list;
 	}
 
-	//身長検索
-	public ArrayList<RecordBean> findByHeight(double heightFrom, double heightTo) {
-		try {
-			conn = rcDao.getConnection();
-
-			//SQL文作成
-			String sql = "SELECT * FROM height_weight_record WHERE height <= ? AND height <= ? ";
-			pStmt = conn.prepareStatement(sql);
-
-			pStmt.setDouble(1, heightFrom);
-			pStmt.setDouble(2, heightTo);
-
-			rs = pStmt.executeQuery();
-
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String userId = rs.getString("user_id");
-				Date date = rs.getDate("input_date");
-				double height = rs.getDouble("height");
-				double weight = rs.getDouble("weight");
-				double temp = rs.getDouble("temperature");
-				String note = rs.getString("note");
-
-				LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
-				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temp, note);
-				list.add(rcBean);
-			}
-		} catch (SQLException e) {
-			System.out.println("SELECT(findByHeight)エラー：" + e.getMessage());
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pStmt != null)
-					pStmt.close();
-				if (rcDao != null)
-					rcDao.closeDBAccess();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
+//	//身長検索
+//	public ArrayList<RecordBean> findByHeight(double heightFrom, double heightTo) {
+//		try {
+//			conn = rcDao.getConnection();
+//
+//			//SQL文作成
+//			String sql = "SELECT * FROM height_weight_record WHERE height <= ? AND height <= ? ";
+//			pStmt = conn.prepareStatement(sql);
+//
+//			pStmt.setDouble(1, heightFrom);
+//			pStmt.setDouble(2, heightTo);
+//
+//			rs = pStmt.executeQuery();
+//
+//			while (rs.next()) {
+//				int id = rs.getInt("id");
+//				String userId = rs.getString("user_id");
+//				Date date = rs.getDate("input_date");
+//				double height = rs.getDouble("height");
+//				double weight = rs.getDouble("weight");
+//				double temp = rs.getDouble("temperature");
+//				String note = rs.getString("note");
+//
+//				LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
+//				RecordBean rcBean = new RecordBean(id, userId, localDate, height, weight, temp, note);
+//				list.add(rcBean);
+//			}
+//		} catch (SQLException e) {
+//			System.out.println("SELECT(findByHeight)エラー：" + e.getMessage());
+//		} finally {
+//			try {
+//				if (rs != null)
+//					rs.close();
+//				if (pStmt != null)
+//					pStmt.close();
+//				if (rcDao != null)
+//					rcDao.closeDBAccess();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return list;
+//	}
 
 }

@@ -16,15 +16,16 @@ if (msgList == null) {
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="<%=request.getContextPath()%>/css/style.css"
-	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css">
 <title>記録詳細画面</title>
 </head>
 <body>
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
+	<div style="color:red;">
 	<%=msgList%><br>
+	</div>
 	<%
 	for (RecordBean list : lists) {
 		String datetimeformated = datetimeformatter.format(list.getInputDate());
@@ -61,12 +62,9 @@ if (msgList == null) {
 	<form action="/recordDelete?id=<%=list.getId()%>" method="POST">
 		<button type="submit">削除</button>
 	</form>
-	<%
-	}
-	%>
+	<% } %>
 	<form action="/" method="GET">
-		<input type="button" value="戻る" onclick="history.back()">
+		<input type="button" value="戻る" onClick="history.go(-1)">
 	</form>
-
 </body>
 </html>

@@ -6,34 +6,32 @@
 	pageEncoding="UTF-8"%>
 <%
 ArrayList<RecordBean> lists = (ArrayList<RecordBean>) request.getAttribute("recordList");
-
-/* Iterator<RecordBean> listAll = lists.iterator(); */
 DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+/* Iterator<RecordBean> listAll = lists.iterator(); */
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>記録一覧</title>
-<link href="<%=request.getContextPath()%>/css/style.css"
-	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
-	<p>ErrorMessage</p>
+<!-- 	<p>ErrorMessage</p> -->
 	<form action="/recordList" method="POST">
 		<table>
 			<tr>
 				<th>日付</th>
 				<td><select name="year">
 						<option value="">年(直近)</option>
-						<option value="2022">2022</option>
-						<option value="2021">2021</option>
 						<option value="2020">2020</option>
 						<option value="2019">2019</option>
 						<option value="2018">2018</option>
+						<option value="2017">2017</option>
+						<option value="2016">2016</option>
 				</select>年</td>
 				<td><select name="month">
 						<option value="">月</option>
@@ -135,8 +133,8 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	<form action="/recordInput" method="POST">
 		<button type="submit">新規登録</button>
 	</form>
-	<form action="/" method="GET">
-		<input type="button" value="戻る" onclick="history.back()">
+	<form>
+		<input type="button" value="戻る" onClick="history.go(-1)">
 	</form>
 </body>
 </html>

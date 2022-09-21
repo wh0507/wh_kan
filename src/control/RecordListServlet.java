@@ -29,28 +29,35 @@ public class RecordListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//DBから呼び出し
-		RecordDAO dao = new RecordDAO();
-		List<RecordBean> recordList = dao.findAll();
-		request.setAttribute("recordList", recordList);
-
-		//日付
-		String[] year = request.getParameterValues("year");
-		String[] month = request.getParameterValues("month");
-		String[] day = request.getParameterValues("day");
-
-		//身長
-		String strHeightFrom = request.getParameter("heightFrom");
-		String strHeightTo = request.getParameter("heightTo");
-		//体重
-		String strWeightFrom = request.getParameter("weightFrom");
-		String strWeightTo = request.getParameter("weightTo");
-		//体温
-		String strTempFrom = request.getParameter("tempFrom");
-		String strTempTo = request.getParameter("tempTo");
+		//		//日付
+		//		String[] year = request.getParameterValues("year");
+		//		String[] month = request.getParameterValues("month");
+		//		String[] day = request.getParameterValues("day");
+		//
+		//		//身長
+		//		String strHeightFrom = request.getParameter("heightFrom");
+		//		String strHeightTo = request.getParameter("heightTo");
+		//		//体重
+		//		String strWeightFrom = request.getParameter("weightFrom");
+		//		String strWeightTo = request.getParameter("weightTo");
+		//		//体温
+		//		String strTempFrom = request.getParameter("tempFrom");
+		//		String strTempTo = request.getParameter("tempTo");
 
 		//チェックボックス
 		String checked = request.getParameter("checkbox");
+
+		//DBから呼び出し
+		RecordDAO dao = new RecordDAO();
+		List<RecordBean> recordList;
+		//チェックボックス確認
+		if (checked != "") {
+			recordList = dao.findAll(); //すべてのデータ呼び出し
+			request.setAttribute("recordList", recordList);
+		} else if (checked == "") {
+			recordList = dao.findByDate();
+			request.setAttribute("recordList", recordList);
+		}
 
 		//記録一覧画面へフォワード
 		String forwardPath = null;

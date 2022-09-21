@@ -4,8 +4,7 @@
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 LocalDate date = LocalDate.now();
 DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -19,15 +18,16 @@ if (msgList == null) {
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="<%=request.getContextPath()%>/css/style.css"
-	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css">
 <title>登録画面</title>
 </head>
 <body>
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
+	<div style="color:red;">
 	<%=msgList%><br>
+	</div>
 	<form action="/recordInsert" method="GET">
 		<table>
 			<tr>
@@ -57,8 +57,7 @@ if (msgList == null) {
 		<button type="submit">登録</button>
 	</form>
 	<form action="/" method="GET">
-		<input type="button" value="戻る" onclick="history.back()">
+ 		<input type="button" value="戻る" onclick="history.back()">
 	</form>
-
 </body>
 </html>

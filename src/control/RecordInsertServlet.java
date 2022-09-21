@@ -23,8 +23,9 @@ public class RecordInsertServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		Errcheck errcheck = new Errcheck();
-		String msg = "";
+
+		Errcheck errcheck = new Errcheck(); //エラーチェック
+		String msg = "";	//メッセージ
 
 		//リクエストパラメータを取得
 		String date = request.getParameter("date");
@@ -45,9 +46,11 @@ public class RecordInsertServlet extends HttpServlet {
 
 			String forwardPath = null;
 			forwardPath = "/recordInput";
+			//記録入力画面へフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 			dispatcher.forward(request, response);
 		} else {
+			//成功時
 			doPost(request, response);
 		}
 
@@ -83,7 +86,7 @@ public class RecordInsertServlet extends HttpServlet {
 		RecordDAO rcDao = new RecordDAO();
 		rcDao.insert(rcBean);
 
-		//成功時
+		//記録一覧画面へリダイレクト
 		response.sendRedirect("/recordList");
 
 	}

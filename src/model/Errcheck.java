@@ -9,7 +9,7 @@ public class Errcheck {
 
 	String msg = "";
 
-	//dateCheck
+	//日付チェック
 	public String dateCheck(String date) {
 
 		String pattern = "^[0-9]{4}/[0-9]{2}/[0-9]{2}$";
@@ -28,6 +28,7 @@ public class Errcheck {
 		ArrayList<RecordBean> list = new ArrayList<>();
 		RecordDAO dao = new RecordDAO();
 		list = dao.findAll();
+		//保存されているデータと比較
 		for (int i = 0; i < list.size(); i++) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			LocalDate localDate = LocalDate.parse(date, formatter);
@@ -39,7 +40,7 @@ public class Errcheck {
 		return msg;
 	}
 
-	//heightCheck
+	//身長チェック
 	public String heightCheck(String height) {
 
 		String pattern = "^([1-9][0-9]{0,2}|0)(?:\\.\\d{1}+)?";
@@ -56,7 +57,7 @@ public class Errcheck {
 		return msg;
 	}
 
-	//weightCheck
+	//体重チェック
 	public String weightCheck(String weight) {
 
 		String pattern = "^([1-9][0-9]{0,2}|0)(?:\\.\\d{1}+)?";
@@ -73,7 +74,7 @@ public class Errcheck {
 		return msg;
 	}
 
-	//tempeCheck
+	//体温チェック
 	public String tempCheck(String temp) {
 
 		String pattern = "^([1-9][0-9]{0,1}|0)(?:\\.\\d{1}+)?";

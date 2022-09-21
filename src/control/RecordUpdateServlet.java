@@ -25,8 +25,6 @@ public class RecordUpdateServlet extends HttpServlet {
 		Errcheck errcheck = new Errcheck();
 		String msg = "";
 
-		//		String date = request.getParameter("date");
-
 		String height = request.getParameter("height");
 		msg = errcheck.heightCheck(height);
 
@@ -46,8 +44,9 @@ public class RecordUpdateServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 		} else {
-
+			//成功時
 			request.setCharacterEncoding("UTF-8");
+
 			int id = Integer.parseInt(request.getParameter("id"));
 			double height1 = Double.parseDouble(request.getParameter("height"));
 			double weight1 = Double.parseDouble(request.getParameter("weight"));
@@ -60,7 +59,7 @@ public class RecordUpdateServlet extends HttpServlet {
 
 			//		request.setAttribute("rcBean", rcBean);
 
-			//成功時
+			//記録一覧画面へリダイレクト
 			response.sendRedirect("/recordList");
 		}
 

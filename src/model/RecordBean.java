@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+// RecordBeans
 public class RecordBean implements Serializable {
 
 	private int id;

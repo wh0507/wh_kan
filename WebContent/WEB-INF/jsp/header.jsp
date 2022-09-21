@@ -16,16 +16,23 @@ int no = Integer.parseInt(request.getParameter("no"));
 <body>
 	<nav aria-label="Breadcrumb" class="breadcrumb">
 		<ul>
+			<!-- メインメニュー -->
 			<% if (no == 0) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
-			<% } else if (no==1) { %>
+			<% } %>
+			<!-- メインメニュー > 記録一覧 -->
+			<% if (no==1) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
 			<li><a href="/recordList">記録一覧</a></li>
-			<% } else if (no==2) { %>
+			<% } %>
+			<!-- メインメニュー > 記録一覧 > 記録入力 -->
+			<% if (no==2) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
 			<li><a href="/recordList">記録一覧</a></li>
 			<li><a href="/recordInput">記録入力</a></li>
-			<% } else if (no==3) { %>
+			<% } %>
+			<!-- メインメニュー > 記録一覧 > 記録詳細 -->
+			<% if (no==3) { %>
 			<li><a href="/mainMenu">メインメニュー</a></li>
 			<li><a href="/recordList">記録一覧</a></li>
 			<li><a href="/recordChange">記録詳細</a></li>
