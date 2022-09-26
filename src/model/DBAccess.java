@@ -8,9 +8,9 @@ public class DBAccess {
 	//JDBC接続先情報
 	private static final String CONN = "jdbc:postgresql://localhost:5432/mydb";
 	//ユーザー名
-	private static final String USER = "postgres"; //myuser
+	private static final String USER = "myuser"; //myuser
 	//パスワード
-	private static final String PASS = "postgres"; //password
+	private static final String PASS = "password"; //password
 
 	Connection conn = null;
 

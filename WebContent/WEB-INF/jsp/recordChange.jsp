@@ -63,8 +63,9 @@ if (msgList == null) {
 		<button type="submit">削除</button>
 	</form>
 	<% } %>
-	<form action="/" method="GET">
-		<input type="button" value="戻る" onClick="history.go(-1)">
+	<!-- 戻るボタン -->
+	<form action="/recordList" method="GET">
+		<input type="submit" value="戻る">
 	</form>
 </body>
 </html>

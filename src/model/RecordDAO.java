@@ -21,7 +21,7 @@ public class RecordDAO extends DBAccess {
 			conn = rcDao.getConnection(); //コネクト処理
 
 			//SQL文作成
-			String sql = "SELECT * FROM height_weight_record ";
+			String sql = "SELECT * FROM height_weight_record ORDER BY id DESC";
 			pStmt = conn.prepareStatement(sql);
 
 			rs = pStmt.executeQuery();

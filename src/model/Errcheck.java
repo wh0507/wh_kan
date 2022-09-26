@@ -16,7 +16,7 @@ public class Errcheck {
 		boolean matDate = Pattern.matches(pattern, date);
 
 		if (date.isEmpty() == true) {
-			msg += "日付を入力してください。<br>";
+			msg += "日付を入力して下さい。<br>";
 			return msg;
 		}
 
@@ -47,12 +47,12 @@ public class Errcheck {
 		boolean matHeight = Pattern.matches(pattern, height);
 
 		if (height.isEmpty() == true) {
-			msg += "身長を入力してください。<br>";
+			msg += "身長を入力して下さい。<br>";
 			return msg;
 		}
 
 		if (matHeight == false) {
-			msg += "身長は半角数値(整数部3桁まで小数部1位まで)で入力してください。<br>";
+			msg += "身長は半角数値(整数部3桁まで小数部1位まで)で入力して下さい。<br>";
 		}
 		return msg;
 	}
@@ -64,12 +64,12 @@ public class Errcheck {
 		boolean matWeight = Pattern.matches(pattern, weight);
 
 		if (weight.isEmpty() == true) {
-			msg += "体重を入力してください。<br>";
+			msg += "体重を入力して下さい。<br>";
 			return msg;
 		}
 
 		if (matWeight == false) {
-			msg += "体重は半角数値(整数部3桁まで小数部1位まで)で入力してください。<br>";
+			msg += "体重は半角数値(整数部3桁まで小数部1位まで)で入力して下さい。<br>";
 		}
 		return msg;
 	}
@@ -80,11 +80,11 @@ public class Errcheck {
 		String pattern = "^([1-9][0-9]{0,1}|0)(?:\\.\\d{1}+)?";
 		boolean matTemp = Pattern.matches(pattern, temp);
 		if (temp.isEmpty() == true) {
-			msg += "体温を入力してください。<br>";
+			msg += "体温を入力して下さい。<br>";
 			return msg;
 		}
 		if (matTemp == false) {
-			msg += "体温は半角数値(整数部2桁まで小数部1位まで)で入力してください。<br>";
+			msg += "体温は半角数値(整数部2桁まで小数部1位まで)で入力して下さい。<br>";
 		}
 		return msg;
 	}
