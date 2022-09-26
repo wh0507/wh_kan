@@ -1,16 +1,17 @@
 @charset "UTF-8";
-
+/*パンくずリスト*/
 .breadcrumb a {
-	padding: 0 .5rem;
+	/* 	margin: 50px, 10px; */
+	/* 	padding: 0 .5rem; */
+	/* 	text-align: left; */
 	text-decoration: none;
 }
 
 .breadcrumb ul {
 	display: flex;
-	flex-wrap: wrap;
+	padding-left: 0px;
 	list-style: none;
-	margin: 0;
-	padding: 0;
+	flex-wrap: wrap;
 }
 
 .breadcrumb li:not(:last-child)::after {
@@ -19,6 +20,51 @@
 	content: ">";
 }
 
+/*メッセージ*/
+body {
+	margin: 50px 50px;
+}
+
 .message {
 	color: red;
+}
+
+table, th, td {
+	border: 1px solid #bcbcbc;
+	border-collapse: collapse;
+}
+
+table {
+	width: 100%;
+	text-align: left;
+	margin: 20px;
+}
+
+/*記録一覧テーブル（上）*/
+.date-table table, .date-table th, .date-table td {
+	border: none;
+}
+
+.date-table table tr *:nth-child(1) {
+	width: 100px;
+}
+
+.date-table table tr *:nth-child(2) {
+	width: 150px;
+}
+
+.date-table table tr *:nth-child(3) {
+	width: 150px;
+}
+
+/*記録一覧テーブル（下）*/
+.record-table table {
+	width: 90%;
+	text-align: center;
+}
+
+/*登録画面、詳細画面*/
+.insert-table table, .insert-table th, .insert-table td {
+	width: 25%;
+	border: none;
 }
