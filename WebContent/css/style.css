@@ -18,3 +18,7 @@
 	margin: 0 .25rem;
 	content: ">";
 }
+
+.message {
+	color: red;
+}

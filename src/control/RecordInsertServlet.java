@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.RecordDAO;
 import model.Errcheck;
 import model.RecordBean;
-import model.RecordDAO;
 
 @WebServlet("/recordInsert")
 public class RecordInsertServlet extends HttpServlet {

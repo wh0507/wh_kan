@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.RecordDAO;
 import model.RecordBean;
-import model.RecordDAO;
 
 /**
  * 記録詳細・更新コントローラー

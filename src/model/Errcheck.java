@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import dao.RecordDAO;
+
 public class Errcheck {
 
 	String msg = "";
@@ -29,14 +31,18 @@ public class Errcheck {
 		RecordDAO dao = new RecordDAO();
 		list = dao.findAll();
 		//保存されているデータと比較
-		for (int i = 0; i < list.size(); i++) {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-			LocalDate localDate = LocalDate.parse(date, formatter);
-			if (list.get(i).getInputDate().equals(localDate)) {
-				msg += "日付は既に記録されています。別の日付で入力してください。<br>";
-			}
-		}
 
+		try {
+			for (int i = 0; i < list.size(); i++) {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+				LocalDate localDate = LocalDate.parse(date, formatter);
+				if (list.get(i).getInputDate().equals(localDate)) {
+					msg += "日付は既に記録されています。別の日付で入力してください。<br>";
+				}
+			}
+		} catch (Exception e) {
+			msg += "日付は存在する日付を入力してください。<br>";
+		}
 		return msg;
 	}
 

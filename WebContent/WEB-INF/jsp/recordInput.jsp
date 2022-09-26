@@ -1,7 +1,5 @@
-<%@page import="javax.swing.event.ListSelectionEvent"%>
-<%@page import="model.RecordBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
+<%@page import="model.RecordBean"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.Date"%>
@@ -16,9 +14,13 @@ String msgList = (String) request.getAttribute("msg");
 if (msgList == null) {
 	msgList = "";
 }
-
-List<String> lists = (List<String>)session.getAttribute("recordList");
-
+String height = request.getParameter("height");
+String weight = request.getParameter("weight");
+String temp = request.getParameter("temp");
+String note = request.getParameter("note");
+if (height == null) {
+	height = ""; weight = ""; temp = ""; note = "";
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -32,37 +34,38 @@ List<String> lists = (List<String>)session.getAttribute("recordList");
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
-	<div style="color: red;">
+	<div class="message">
 		<%=msgList%><br>
 	</div>
 	<form action="/recordInsert" method="GET">
-		<table>
-			<tr>
-				<th>日付</th>
-				<td><input type="text" name="date" value=<%=datetimeformated%>></td>
-			</tr>
-			<tr>
-				<th>身長</th>
-				<td><input type="text" name="height" value="<%=request.getParameter("height")%>"></td>
-				<td>cm</td>
-			</tr>
-			<tr>
-				<th>体重</th>
-				<td><input type="text" name="weight"
-					value="<%=request.getParameter("weight")%>"></td>
-				<td>kg</td>
-			</tr>
-			<tr>
-				<th>体温</th>
-				<td><input type="text" name="temp"
-					value="<%=request.getParameter("temp")%>"></td>
-				<td>℃</td>
-			</tr>
-			<tr>
-				<th>備考</th>
-				<td><textarea name="note" cols="20" rows="5"></textarea></td>
-			</tr>
-		</table>
+		<div class="insert-table">
+			<table>
+				<tr>
+					<th>日付</th>
+					<td><input type="text" name="date" value=<%=datetimeformated%>></td>
+				</tr>
+				<tr>
+					<th>身長</th>
+					<td><input type="text" name="height" value="<%=height%>"></td>
+
+					<td>cm</td>
+				</tr>
+				<tr>
+					<th>体重</th>
+					<td><input type="text" name="weight" value="<%=weight%>"></td>
+					<td>kg</td>
+				</tr>
+				<tr>
+					<th>体温</th>
+					<td><input type="text" name="temp" value="<%=temp%>"></td>
+					<td>℃</td>
+				</tr>
+				<tr>
+					<th>備考</th>
+					<td><textarea name="note" cols="20" rows="5"><%=note%></textarea></td>
+				</tr>
+			</table>
+		</div>
 		<!-- 登録ボタン -->
 		<button type="submit">登録</button>
 	</form>
