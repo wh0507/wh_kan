@@ -44,6 +44,7 @@ public class LoginCheckServlet extends HttpServlet {
 		UserDTO dto = new UserDTO();
 		dto.setUserId(userId);
 		dto.setPass(pass);
+
 		UserDTO result = dao.loginAction(dto);
 
 		HttpSession session = request.getSession();

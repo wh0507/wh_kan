@@ -27,9 +27,9 @@ public class UserDAO extends DBAccess {
 			pStmt.setString(2, dto.getPass());
 			rs = pStmt.executeQuery();
 			while (rs.next()) {
-				login.setUserId("user_id");
-				login.setUserName("user_name");
-				login.setPass("password");
+				login.setUserId(rs.getString("user_id"));
+				login.setUserName(rs.getString("user_name"));
+				login.setPass(rs.getString("password"));
 			}
 		} catch (SQLException e) {
 			System.out.println("SELECTエラー：" + e.getMessage());
