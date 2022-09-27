@@ -3,8 +3,6 @@ package control;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.RecordDAO;
 import model.Errcheck;
@@ -43,18 +40,9 @@ public class RecordInsertServlet extends HttpServlet {
 		String temp = request.getParameter("temp");
 		msg = errcheck.tempCheck(temp);
 
-		HttpSession session = request.getSession();
-		List<String> recordList = new ArrayList<>();
-		recordList.add(height);
-		recordList.add(weight);
-		recordList.add(temp);
-
-		session.getAttribute("recordList");
-
 		if (!msg.isEmpty()) {
 			//失敗時
 			request.setAttribute("msg", msg);
-			session.setAttribute("recordList", recordList);
 
 			String forwardPath = null;
 			forwardPath = "/recordInput";

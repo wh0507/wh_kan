@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.RecordDAO;
+import model.Errcheck;
 import model.RecordBean;
 
 /**
@@ -29,6 +30,19 @@ public class RecordListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		Errcheck errcheck = new Errcheck(); //エラーチェック
+		String msg = ""; //メッセージ
+
+		//日付
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
+		String day = request.getParameter("day");
+
+		String date = year + "/" + month + "/" + day;
+
+		if (year != null || month != null || day != null) {
+			msg = errcheck.searchDateCheck(date);
+		}
 		//		//日付
 		//		String[] year = request.getParameterValues("year");
 		//		String[] month = request.getParameterValues("month");
@@ -50,6 +64,7 @@ public class RecordListServlet extends HttpServlet {
 		//DBから呼び出し
 		RecordDAO dao = new RecordDAO();
 		List<RecordBean> recordList;
+
 		//チェックボックス確認
 		if (checked != "") {
 			recordList = dao.findAll(); //すべてのデータ呼び出し
@@ -58,6 +73,9 @@ public class RecordListServlet extends HttpServlet {
 			recordList = dao.findByDate();
 			request.setAttribute("recordList", recordList);
 		}
+
+		//失敗時
+		request.setAttribute("msg", msg);
 
 		//記録一覧画面へフォワード
 		String forwardPath = null;

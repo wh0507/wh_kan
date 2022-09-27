@@ -11,6 +11,33 @@ public class Errcheck {
 
 	String msg = "";
 
+	//日付検索のチェック
+	public String searchDateCheck(String date) {
+
+		if (date.contains("d")) {
+			msg += "日付を選択して下さい。<br>";
+			return msg;
+		}
+
+		ArrayList<RecordBean> recordList = new ArrayList<>();
+		RecordDAO dao = new RecordDAO();
+		recordList = dao.findByDate();
+
+		for (int i = 0; i < recordList.size(); i++) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			LocalDate localDate = LocalDate.parse(date, formatter);
+			if (recordList.get(i).getInputDate().equals(localDate)) {
+
+				msg += "日付のデータあり<br>";
+				return msg;
+			}
+		}
+		msg += "日付は存在する日付を入力してください。<br>";
+
+		return msg;
+
+	}
+
 	//日付チェック
 	public String dateCheck(String date) {
 
@@ -43,6 +70,7 @@ public class Errcheck {
 		} catch (Exception e) {
 			msg += "日付は存在する日付を入力してください。<br>";
 		}
+
 		return msg;
 	}
 

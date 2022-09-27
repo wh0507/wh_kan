@@ -8,6 +8,10 @@
 ArrayList<RecordBean> lists = (ArrayList<RecordBean>) request.getAttribute("recordList");
 DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 /* Iterator<RecordBean> listAll = lists.iterator(); */
+String msgList = (String) request.getAttribute("msg");
+if (msgList == null) {
+	msgList = "";
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -21,8 +25,11 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
-	<div style="color: red;">
+	<!-- <div style="color: red;">
 		検索機能未実装（チェックボックスのみ実装）<br>
+	</div>-->
+	<div class="message">
+		<%=msgList%><br>
 	</div>
 	<form action="/recordList" method="POST">
 		<div class="date-table">
@@ -30,7 +37,7 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 				<tr>
 					<th>日付</th>
 					<td><select name="year">
-							<option value="">年(直近)</option>
+							<option value="d">年(直近)</option>
 							<option value="2022">2022</option>
 							<option value="2021">2021</option>
 							<option value="2020">2020</option>
@@ -38,22 +45,22 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 							<option value="2018">2018</option>
 					</select>年</td>
 					<td><select name="month">
-							<option value="">月</option>
+							<option value="d">月</option>
 							<option value="12">12</option>
 							<option value="11">11</option>
 							<option value="10">10</option>
-							<option value="9">9</option>
-							<option value="8">8</option>
-							<option value="7">7</option>
-							<option value="6">6</option>
-							<option value="5">5</option>
-							<option value="4">4</option>
-							<option value="3">3</option>
-							<option value="2">2</option>
-							<option value="1">1</option>
+							<option value="09">9</option>
+							<option value="08">8</option>
+							<option value="07">7</option>
+							<option value="06">6</option>
+							<option value="05">5</option>
+							<option value="04">4</option>
+							<option value="03">3</option>
+							<option value="02">2</option>
+							<option value="01">1</option>
 					</select>月</td>
 					<td><select name="day">
-							<option value="">日</option>
+							<option value="d">日</option>
 							<option value="31">31</option>
 							<option value="30">30</option>
 							<option value="29">29</option>
@@ -76,15 +83,15 @@ DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 							<option value="12">12</option>
 							<option value="11">11</option>
 							<option value="10">10</option>
-							<option value="9">9</option>
-							<option value="8">8</option>
-							<option value="7">7</option>
-							<option value="6">6</option>
-							<option value="5">5</option>
-							<option value="4">4</option>
-							<option value="3">3</option>
-							<option value="2">2</option>
-							<option value="1">1</option>
+							<option value="09">9</option>
+							<option value="08">8</option>
+							<option value="07">7</option>
+							<option value="06">6</option>
+							<option value="05">5</option>
+							<option value="04">4</option>
+							<option value="03">3</option>
+							<option value="02">2</option>
+							<option value="01">1</option>
 					</select>日</td>
 				</tr>
 			</table>
