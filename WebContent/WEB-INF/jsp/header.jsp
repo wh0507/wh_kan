@@ -37,6 +37,21 @@ int no = Integer.parseInt(request.getParameter("no"));
 			<li><a href="/recordList">記録一覧</a></li>
 			<li><a href="/recordChange">記録詳細</a></li>
 			<% } %>
+
+			<% if (no==4) { %>
+			<li><a href="/mainMenu">メインメニュー</a></li>
+			<li><a href="/userList">ユーザー一覧</a></li>
+			<% } %>
+			<% if (no==5) { %>
+			<li><a href="/mainMenu">メインメニュー</a></li>
+			<li><a href="/userList">ユーザー一覧</a></li>
+			<li><a href="/userChange">ユーザー入力</a></li>
+			<% } %>
+			<% if (no==6) { %>
+			<li><a href="/mainMenu">メインメニュー</a></li>
+			<li><a href="/userList">ユーザー一覧</a></li>
+			<li><a href="/userChange">ユーザー詳細</a></li>
+			<% } %>
 		</ul>
 	</nav>
 </body>

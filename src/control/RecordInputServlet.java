@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 記録入力コントローラー
@@ -23,12 +24,22 @@ public class RecordInputServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String forwardPath = null;
-		forwardPath = "/WEB-INF/jsp/recordInput.jsp?no=2";
-		//記録入力画面へフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-		dispatcher.forward(request, response);
 
+		//ログインチェック追加（arakawa）
+		HttpSession session = request.getSession();
+
+		if(session.getAttribute("user_name") == null) {
+			String msg = "ログイン状態ではありません。再度ログインしてください。";
+			session.setAttribute("msg", msg);
+			response.sendRedirect("/login");
+		}else {
+
+			String forwardPath = null;
+			forwardPath = "/WEB-INF/jsp/recordInput.jsp?no=2";
+			//記録入力画面へフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

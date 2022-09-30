@@ -22,6 +22,9 @@ if (height == null) {
 	height = ""; weight = ""; temp = ""; note = "";
 }
 %>
+
+<%-- ユーザー名取得のため追加（arakawa） --%>
+<%String user_name = (String)session.getAttribute("user_name"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +37,12 @@ if (height == null) {
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
+
+	<!-- 追加（arakawa）-->
+	<form action="/logout" method="GET">
+		<p><%=user_name%>さん <input type="submit" value="ログアウト"></p>
+	</form>
+
 	<div class="message">
 		<%=msgList%><br>
 	</div>

@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ログアウト画面</title>
+<title>Insert title here</title>
 </head>
 <body>
-	ログアウトしました。
+
+	<p>ログアウトしました</p>
 	<form action="/login" method="GET">
 		<input type="submit" value="ログイン画面に戻る">
 	</form>

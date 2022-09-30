@@ -56,7 +56,7 @@ public class Errcheck {
 
 		ArrayList<RecordBean> list = new ArrayList<>();
 		RecordDAO dao = new RecordDAO();
-		list = dao.findAll();
+//		list = dao.findAll(user_id);
 		//保存されているデータと比較
 
 		try {
@@ -120,6 +120,19 @@ public class Errcheck {
 		if (matTemp == false) {
 			msg += "体温は半角数値(整数部2桁まで小数部1位まで)で入力して下さい。<br>";
 		}
+		return msg;
+	}
+
+	//ログインのエラー処理のため実装（s_arakawa）
+	public String login_null_check(String userId, String pass) {
+		String msg = "";
+
+		if(userId.isEmpty() || userId == null) {
+			msg = "ユーザーIDを入力してください";
+		}else if(pass.isEmpty() || pass == null) {
+			msg = "パスワードを入力してください";
+		}
+
 		return msg;
 	}
 

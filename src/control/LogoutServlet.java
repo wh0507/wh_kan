@@ -11,36 +11,34 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * ログアウトコントローラー
+ * Servlet implementation class LogoutServlet
  */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LogoutServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
-		if (session.getAttribute("userId") != null) {
-			session.removeAttribute("userId");
-		}
-		if (session.getAttribute("userName") != null) {
-			session.removeAttribute("userName");
-		}
-
-		session.invalidate(); //すべてのセッション終了
+		session.invalidate();
 
 		String forwardPath = null;
 		forwardPath = "/WEB-INF/jsp/logout.jsp";
-		//ログアウト画面へフォワード
+		//MainMenuへフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 		dispatcher.forward(request, response);
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
 	}
 
 }

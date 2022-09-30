@@ -1,33 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%
-String msgList = (String) request.getAttribute("msg");
-if (msgList == null) {
-	msgList = "";
+String msg = (String) request.getAttribute("msg");
+String user_id = (String) session.getAttribute("userId");
+String pass = (String) session.getAttribute("pass");
+String else_msg = (String)session.getAttribute("msg");
+
+if (msg == null) {
+	msg = "";
 }
+if(else_msg == null){
+	else_msg = "";
+}
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ログイン画面</title>
+<title>Insert title here</title>
 </head>
 <body>
-	アカウント情報を入力し、ログインしてください。
-	<label style="color: red;"> <%=msgList%><br>
-	</label>
+
+	<p>アカウント情報を入力し、ログインしてください</p>
+	<%=msg%>
+
+	<%
+	if (msg == null || msg == "") {
+	%>
+	<%=else_msg%>
+
 	<form action="/loginCheck" method="post">
-		<table>
-			<tr>
-				<td>ユーザーID：</td>
-				<td><input type="text" name="userId"></td>
-			</tr>
-			<tr>
-				<td>パスワード：</td>
-				<td><input type="password" name="pass"></td>
-			</tr>
-		</table>
-		<input type="submit" value="ログイン">
+		<p>ユーザーID:</p>
+		<input type="text" name="userId">
+		<p>パスワード:</p>
+		<input type="password" name="pass">
+		<input type="submit"value="ログイン">
 	</form>
+
+
+	<%
+	} else {
+	%>
+
+	<form action="/loginCheck" method="post">
+		<p>ユーザーID:</p>
+		<input type="text" name="userId" value = <%= user_id %>>
+		<p>パスワード:</p>
+		<input type="password" name="pass" value = <%= pass %>>
+		<input type="submit"value="ログイン">
+	</form>
+
+	<%
+	}
+	%>
+
+
 </body>
 </html>

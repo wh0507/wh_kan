@@ -12,6 +12,10 @@ if (msgList == null) {
 	msgList = "";
 }
 %>
+
+<%-- ユーザー名取得のため追加（arakawa） --%>
+<%String user_name = (String)session.getAttribute("user_name"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +28,12 @@ if (msgList == null) {
 	<header>
 		<%@ include file="header.jsp"%>
 	</header>
+
+	<!-- 追加（arakawa）-->
+	<form action="/logout" method="GET">
+		<p><%=user_name%>さん <input type="submit" value="ログアウト"></p>
+	</form>
+
 	<div style="color: red;">
 		<%=msgList%><br>
 	</div>

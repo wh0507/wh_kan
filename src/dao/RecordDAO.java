@@ -18,14 +18,15 @@ public class RecordDAO extends DBAccess {
 	ArrayList<RecordBean> list = new ArrayList<>();
 
 	//記録一覧
-	public ArrayList<RecordBean> findAll() {
+	public ArrayList<RecordBean> findAll(String user_id) {
 		try {
 			conn = rcDao.getConnection(); //コネクト処理
 
 			//SQL文作成
-			String sql = "SELECT * FROM height_weight_record ORDER BY id DESC";
+			String sql = "SELECT * FROM height_weight_record WHERE user_id = ? ORDER BY id DESC";
 			pStmt = conn.prepareStatement(sql);
 
+			pStmt.setString(1, user_id);
 			rs = pStmt.executeQuery();
 
 			while (rs.next()) {
@@ -57,6 +58,8 @@ public class RecordDAO extends DBAccess {
 		}
 		return list;
 	}
+
+
 
 	//記録の登録
 	public boolean insert(RecordBean rcBean) {
@@ -236,6 +239,64 @@ public class RecordDAO extends DBAccess {
 		}
 		return list;
 	}
+
+	//ログインチェック(arakawa)
+	public boolean login_check(String userId, String pass) {
+		boolean bool = false;
+
+		try {
+			conn = rcDao.getConnection(); //コネクト処理
+			//SQL文作成
+			String sql = "SELECT * FROM user_info";
+			pStmt = conn.prepareStatement(sql);
+			rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+
+				String userId_db = rs.getString("user_id");
+				String pass_db = rs.getString("password");
+
+				if(userId.equals(userId_db) && pass.equals(pass_db)) {
+					bool = true;
+					break;
+
+				}else {
+					bool = false;
+				}
+			}
+
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		return bool;
+	}
+
+	//ユーザー名取得(arakawa)
+	public String get_username(String user_id) {
+
+		String user_name = "";
+		try {
+			conn = rcDao.getConnection(); //コネクト処理
+			//SQL文作成
+			String sql = "SELECT user_name FROM user_info WHERE user_id = ?";
+			pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, user_id);
+			rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				user_name = rs.getString("user_name");
+			}
+
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		return user_name;
+	}
+
 
 //	//身長検索
 //	public ArrayList<RecordBean> findByHeight(double heightFrom, double heightTo) {

@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UserDao;
+import model.UserBean;
+
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class UserDeleatServlet
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/userDelete")
+public class UserDeleatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public UserDeleatServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,9 +32,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
 		String forwardPath = null;
-		forwardPath = "/WEB-INF/jsp/login.jsp";
+		forwardPath = "/WEB-INF/jsp/userList.jsp?no=4";
 		//MainMenuへフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 		dispatcher.forward(request, response);
@@ -41,8 +43,19 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+
+		UserBean uBean = new UserBean();
+		String user_id = request.getParameter("user_id");
+		uBean.setUser_id(user_id);
+		UserDao Dao = new UserDao();
+
+		//削除メソッド呼び出し
+		Dao.Delete(uBean.getUser_id());
+		//同じユーザーIDをheight_weight_recordから削除
+		Dao.delete_user_all(user_id);
+
+		response.sendRedirect("/userList");
 	}
 
 }

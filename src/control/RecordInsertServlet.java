@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.RecordDAO;
 import model.Errcheck;
@@ -68,6 +69,10 @@ public class RecordInsertServlet extends HttpServlet {
 		String temp = request.getParameter("temp");
 		String note = request.getParameter("note");
 
+
+		HttpSession session = request.getSession();
+		String user_id = (String)session.getAttribute("userId");
+
 		//入力値をプロパティに設定
 		RecordBean rcBean = new RecordBean();
 		rcBean.setUserId("admin");
@@ -81,6 +86,7 @@ public class RecordInsertServlet extends HttpServlet {
 		rcBean.setWeight(Double.parseDouble(weight));
 		rcBean.setTemperature(Double.parseDouble(temp));
 		rcBean.setNote(note);
+		rcBean.setUserId(user_id);
 
 		//DBへ保存
 		RecordDAO rcDao = new RecordDAO();
